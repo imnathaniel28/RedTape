@@ -1,0 +1,902 @@
+[
+  {
+    "event": "moving_to_new_state",
+    "label": "Moving to a New State",
+    "description": "Relocating your primary residence to a different state",
+    "forms": [
+      {
+        "form_name": "National Voter Registration Form",
+        "agency": "U.S. Election Assistance Commission",
+        "description": "Register to vote or update your voter registration in your new state",
+        "url": "https://www.eac.gov/voters/national-mail-voter-registration-form",
+        "deadline": "Varies by state, typically 15-30 days before an election",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Varies by state; typically processed within 2-4 weeks",
+        "prerequisites": "U.S. citizenship, meet your state's residency requirements, be 18 years old by Election Day",
+        "notes": "Works in 47 states (not NH, WY, or ND). Can also register at vote.gov. Some states offer same-day registration."
+      },
+      {
+        "form_name": "USPS Change of Address (PS Form 3575)",
+        "agency": "United States Postal Service",
+        "description": "Forward your mail to your new address",
+        "url": "https://www.usps.com/manage/forward.htm",
+        "deadline": "Submit before or immediately after moving",
+        "online_only": true,
+        "fees": "$1.25 identity verification fee online; free in person at Post Office",
+        "processing_time": "Mail forwarding begins within 3 business days; allow up to 2 weeks",
+        "prerequisites": "New address, identity verification (credit card for online)",
+        "notes": "First-Class Mail forwarded for 12 months; periodicals for 60 days. Can also be done in person using PS Form 3575."
+      },
+      {
+        "form_name": "IRS Form 8822 — Change of Address",
+        "agency": "Internal Revenue Service",
+        "description": "Notify the IRS of your new address for tax correspondence",
+        "url": "https://www.irs.gov/forms-pubs/about-form-8822",
+        "deadline": "File as soon as you move",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "4-6 weeks for IRS to process",
+        "prerequisites": "New mailing address, SSN or ITIN, signature (both spouses if joint)",
+        "notes": "Use Form 8822-B if you also have a business address change. Can also update address on your next tax return."
+      },
+      {
+        "form_name": "SSA Address Change",
+        "agency": "Social Security Administration",
+        "description": "Update your address with the Social Security Administration",
+        "url": "https://www.ssa.gov/personal-record/update-contact-information",
+        "deadline": "Update as soon as possible after moving",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "Immediate when done online",
+        "prerequisites": "my Social Security account (Login.gov or ID.me)",
+        "notes": "Can be done online via my Social Security account, by phone (1-800-772-1213), or in person at a local SSA office."
+      },
+      {
+        "form_name": "New State Driver's License Application",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Apply for a driver's license in your new state of residence",
+        "url": "https://www.usa.gov/state-motor-vehicle-services",
+        "deadline": "Typically 30-90 days after establishing residency, varies by state",
+        "online_only": false,
+        "fees": "Varies by state, typically $20-$90",
+        "processing_time": "Same-day temporary license in most states; permanent card mailed in 1-3 weeks",
+        "prerequisites": "Proof of identity (passport, birth certificate), proof of residency (utility bill, lease), old state driver's license, SSN, proof of lawful status (REAL ID states)",
+        "notes": "Requirements vary by state. Some states require written and/or driving tests for out-of-state transfers."
+      },
+      {
+        "form_name": "Vehicle Registration Transfer",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Register your vehicle in your new state",
+        "url": "https://www.usa.gov/state-motor-vehicle-services",
+        "deadline": "Typically 30-90 days after establishing residency, varies by state",
+        "online_only": false,
+        "fees": "Varies by state, typically $30-$200+ depending on vehicle value",
+        "processing_time": "Same-day temporary registration; permanent documents mailed in 2-6 weeks",
+        "prerequisites": "Current vehicle title, proof of insurance in new state, vehicle identification number (VIN), odometer reading, proof of identity and residency",
+        "notes": "May require vehicle inspection, emissions test, or title transfer depending on state. Sales/use tax may apply."
+      }
+    ]
+  },
+  {
+    "event": "having_a_baby",
+    "label": "Having a Baby",
+    "description": "Welcoming a new child into your family",
+    "forms": [
+      {
+        "form_name": "Birth Certificate Application",
+        "agency": "State Vital Records Office",
+        "description": "Register the birth and obtain official birth certificate copies",
+        "url": "https://www.usa.gov/birth-certificate",
+        "deadline": "Usually filed by the hospital within 10 days of birth",
+        "online_only": false,
+        "fees": "$10-$30 per certified copy, varies by state",
+        "processing_time": "4-8 weeks for first certificate; additional copies available faster",
+        "prerequisites": "Parent identification, hospital birth registration form, mother's maiden name",
+        "notes": "The hospital typically initiates the process. Order multiple certified copies — you'll need them for SSN application, insurance, and other enrollments."
+      },
+      {
+        "form_name": "Application for a Social Security Card (SS-5)",
+        "agency": "Social Security Administration",
+        "description": "Apply for a Social Security number for your newborn",
+        "url": "https://www.ssa.gov/forms/ss-5.pdf",
+        "deadline": "Apply as soon as possible after birth for tax and benefits purposes",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-4 weeks after SSA receives the application; card mailed separately",
+        "prerequisites": "Child's birth certificate, parent's SSN, parent's proof of identity (driver's license, passport)",
+        "notes": "Can be requested at the same time as the birth certificate at the hospital (Enumeration at Birth). You need the SSN to claim the child as a dependent on taxes."
+      },
+      {
+        "form_name": "IRS Form W-4 — Employee's Withholding Certificate",
+        "agency": "Internal Revenue Service",
+        "description": "Update your tax withholding to claim the new dependent",
+        "url": "https://www.irs.gov/forms-pubs/about-form-w-4",
+        "deadline": "Submit to employer as soon as convenient after birth",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Employer implements within 1-2 pay periods",
+        "prerequisites": "Child's SSN (for claiming on taxes), estimated income and deductions",
+        "notes": "Adding a dependent may reduce your tax withholding. Submit to your employer, not the IRS. Use the IRS Tax Withholding Estimator at irs.gov."
+      },
+      {
+        "form_name": "Health Insurance Marketplace Special Enrollment",
+        "agency": "Centers for Medicare & Medicaid Services",
+        "description": "Enroll your newborn in health insurance or update your existing plan",
+        "url": "https://www.healthcare.gov/coverage-outside-open-enrollment/special-enrollment-period/",
+        "deadline": "Within 60 days of birth (special enrollment period)",
+        "online_only": true,
+        "fees": "No enrollment fee; monthly premiums apply based on plan",
+        "processing_time": "Coverage can be retroactive to date of birth",
+        "prerequisites": "Birth certificate or hospital documentation, existing healthcare.gov account or employer HR contact",
+        "notes": "Birth qualifies for a 60-day Special Enrollment Period. If you have employer insurance, notify HR immediately — most employers require notification within 30 days."
+      },
+      {
+        "form_name": "FMLA Leave Request",
+        "agency": "U.S. Department of Labor",
+        "description": "Request Family and Medical Leave for the birth of your child",
+        "url": "https://www.dol.gov/agencies/whd/fmla/forms",
+        "deadline": "30 days advance notice if foreseeable; as soon as practicable otherwise",
+        "online_only": false,
+        "fees": "Free; FMLA leave is unpaid unless employer offers paid leave",
+        "processing_time": "Employer must respond within 5 business days of request",
+        "prerequisites": "12 months of employment with employer, 1,250+ hours worked in past 12 months, employer has 50+ employees within 75 miles, medical certification (WH-380-E form) may be required",
+        "notes": "FMLA provides up to 12 weeks of unpaid, job-protected leave. Your employer may have their own leave request form."
+      }
+    ]
+  },
+  {
+    "event": "getting_married",
+    "label": "Getting Married",
+    "description": "Getting legally married and updating your records",
+    "forms": [
+      {
+        "form_name": "Marriage License Application",
+        "agency": "County Clerk / Recorder",
+        "description": "Apply for a marriage license in the county where you plan to marry",
+        "url": "https://www.usa.gov/marriage-certificate",
+        "deadline": "Apply before the wedding; licenses are valid for a limited period (varies by state)",
+        "online_only": false,
+        "fees": "$30–$100 depending on county; some states offer discounts for premarital counseling",
+        "processing_time": "Same-day to 5 business days; some states have a 1–3 day waiting period after issuance",
+        "prerequisites": "Government-issued photo ID for both parties, Social Security numbers, divorce decree if previously married, birth certificates (some counties)",
+        "notes": "Requirements vary by county — check local clerk's office for fees, waiting periods, and required documents"
+      },
+      {
+        "form_name": "Application for a Social Security Card (SS-5) — Name Change",
+        "agency": "Social Security Administration",
+        "description": "Update your name on your Social Security card after marriage",
+        "url": "https://www.ssa.gov/forms/ss-5.pdf",
+        "deadline": "No strict deadline, but do this before updating other documents",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2–4 weeks for new card; SSA updates records within 24–48 hours",
+        "prerequisites": "Certified marriage certificate (original or certified copy), current valid ID (driver's license or passport), completed SS-5 form",
+        "notes": "Required before you can update your name with the DMV, passport office, or employer. Bring certified marriage certificate."
+      },
+      {
+        "form_name": "State Driver's License Name Change",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Update the name on your driver's license or state ID",
+        "url": "https://www.usa.gov/state-motor-vehicle-services",
+        "deadline": "Varies by state, typically within 30-60 days of name change",
+        "online_only": false,
+        "fees": "$10–$40 depending on state; some states charge standard renewal fee",
+        "processing_time": "Same-day temporary license; permanent card mailed in 1–3 weeks",
+        "prerequisites": "Updated Social Security card (or SSA confirmation letter), certified marriage certificate, current driver's license, proof of residency (some states)",
+        "notes": "Update your SSA records first. Bring marriage certificate, updated Social Security card, and current license."
+      },
+      {
+        "form_name": "U.S. Passport Name Change (DS-5504)",
+        "agency": "U.S. Department of State",
+        "description": "Update the name on your U.S. passport after marriage",
+        "url": "https://travel.state.gov/content/travel/en/passports/have-passport/change-correct.html",
+        "deadline": "No deadline, but update before international travel",
+        "online_only": false,
+        "fees": "Free if passport issued within 1 year (DS-5504); $130 book / $30 card if older (DS-82 renewal)",
+        "processing_time": "6–8 weeks routine; 2–3 weeks expedited ($60 extra)",
+        "prerequisites": "Current passport, certified marriage certificate, updated SS card recommended, passport photo, completed DS-5504 or DS-82 form",
+        "notes": "If passport was issued less than 1 year ago, use Form DS-5504 (free). Otherwise, use DS-82 (renewal with name change)."
+      },
+      {
+        "form_name": "IRS Form W-4 — Update Filing Status",
+        "agency": "Internal Revenue Service",
+        "description": "Update your tax withholding to reflect married filing status",
+        "url": "https://www.irs.gov/forms-pubs/about-form-w-4",
+        "deadline": "Submit to employer; new status applies for the full tax year of marriage",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Employer processes within 1–2 pay periods",
+        "prerequisites": "New spouse's SSN (for filing jointly calculations), completed W-4 form",
+        "notes": "Marriage may change your optimal withholding. Consider using the IRS Tax Withholding Estimator."
+      }
+    ]
+  },
+  {
+    "event": "death_of_family_member",
+    "label": "Death of a Family Member",
+    "description": "Handling affairs after the death of a close family member",
+    "forms": [
+      {
+        "form_name": "Death Certificate Request",
+        "agency": "State Vital Records Office",
+        "description": "Obtain certified copies of the death certificate",
+        "url": "https://www.usa.gov/death-certificate",
+        "deadline": "Order as soon as possible; you'll need multiple copies for various agencies",
+        "online_only": false,
+        "fees": "$10–$30 per certified copy depending on state; order 10–15 copies",
+        "processing_time": "1–2 weeks for certified copies; funeral home files initial certificate within 3–10 days",
+        "prerequisites": "Deceased's full legal name, SSN, date/place of birth, date/place of death, next of kin information, funeral home information",
+        "notes": "The funeral home usually helps file the death certificate. Order at least 10 certified copies."
+      },
+      {
+        "form_name": "SSA Death Notification",
+        "agency": "Social Security Administration",
+        "description": "Report the death to the Social Security Administration",
+        "url": "https://www.ssa.gov/personal-record/when-someone-dies",
+        "deadline": "Report as soon as possible",
+        "online_only": false,
+        "fees": "Free; a one-time $255 lump-sum death benefit may be available to surviving spouse or child",
+        "processing_time": "SSA processes within 1–2 weeks; survivor benefits may take 2–4 weeks to begin",
+        "prerequisites": "Deceased's SSN, certified death certificate, proof of relationship (marriage certificate, birth certificate), your own SSN and ID",
+        "notes": "The funeral home may report the death, but you should confirm. Surviving spouse/dependents may be eligible for survivor benefits."
+      },
+      {
+        "form_name": "IRS Form 1040 — Final Tax Return",
+        "agency": "Internal Revenue Service",
+        "description": "File the deceased person's final federal income tax return",
+        "url": "https://www.irs.gov/individuals/file-the-final-income-tax-returns-of-a-deceased-person",
+        "deadline": "April 15 of the year following the death (standard tax deadline)",
+        "online_only": false,
+        "fees": "Free to file; tax preparation costs vary",
+        "processing_time": "Standard IRS processing: 3–6 weeks for e-filed, 6–8 weeks for paper",
+        "prerequisites": "Deceased's W-2s/1099s, prior year tax returns, SSN, certified death certificate, Letters Testamentary or court appointment as executor",
+        "notes": "Write 'DECEASED' across the top of the return with the date of death. The surviving spouse or executor files this."
+      },
+      {
+        "form_name": "IRS Form 56 — Notice Concerning Fiduciary Relationship",
+        "agency": "Internal Revenue Service",
+        "description": "Notify the IRS that you are acting as executor or administrator of the estate",
+        "url": "https://www.irs.gov/forms-pubs/about-form-56",
+        "deadline": "File as soon as you are appointed as fiduciary",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "4–6 weeks for IRS acknowledgment",
+        "prerequisites": "Letters Testamentary or court order appointing you as fiduciary, deceased's SSN and EIN (if estate has one), your SSN and contact information",
+        "notes": "Required if you are the personal representative handling the deceased person's tax matters"
+      },
+      {
+        "form_name": "Probate Court Filing",
+        "agency": "County Probate Court",
+        "description": "File the will and open probate proceedings if required",
+        "url": "https://www.usa.gov/courts",
+        "deadline": "Varies by state; typically within 30-90 days of death",
+        "online_only": false,
+        "fees": "$50–$400+ depending on state and estate value; attorney fees additional",
+        "processing_time": "6 months to 2+ years depending on estate complexity and state; simple estates may take 3–6 months",
+        "prerequisites": "Original will (if one exists), certified death certificate, petition for probate form (varies by county), list of assets and heirs",
+        "notes": "Not all estates require probate. Small estates may qualify for simplified procedures. Consult an attorney."
+      }
+    ]
+  },
+  {
+    "event": "starting_a_small_business",
+    "label": "Starting a Small Business",
+    "description": "Launching a new business or becoming self-employed",
+    "forms": [
+      {
+        "form_name": "IRS Form SS-4 — Application for Employer Identification Number",
+        "agency": "Internal Revenue Service",
+        "description": "Apply for an EIN (Employer Identification Number) for your business",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/get-an-employer-identification-number",
+        "deadline": "Before hiring employees, opening a business bank account, or filing business taxes",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Immediate if applied online; 4–5 weeks by mail; 4 business days by fax",
+        "prerequisites": "Your SSN or ITIN (responsible party), legal name of business, business address, type of entity (LLC, corp, sole prop, etc.)",
+        "notes": "Online application is the fastest — you receive your EIN immediately. Available Mon-Fri, 7am-10pm ET."
+      },
+      {
+        "form_name": "State Business Registration",
+        "agency": "State Secretary of State",
+        "description": "Register your business entity (LLC, Corporation, etc.) with your state",
+        "url": "https://www.sba.gov/business-guide/launch-your-business/register-your-business",
+        "deadline": "Before conducting business in the state",
+        "online_only": false,
+        "fees": "$50–$500 depending on state and entity type; LLC typically $50–$200, Corporation $100–$300",
+        "processing_time": "1–5 business days online; 2–4 weeks by mail; expedited processing available in most states for extra fee",
+        "prerequisites": "Business name (check availability first), registered agent name and address, Articles of Organization (LLC) or Articles of Incorporation, member/officer information",
+        "notes": "Requirements and fees vary by state and business type. The SBA has links to each state's registration portal."
+      },
+      {
+        "form_name": "DBA / Fictitious Business Name Filing",
+        "agency": "County Clerk or State Agency",
+        "description": "Register a 'Doing Business As' name if operating under a name different from your legal name",
+        "url": "https://www.sba.gov/business-guide/launch-your-business/choose-your-business-name",
+        "deadline": "Before using the business name publicly",
+        "online_only": false,
+        "fees": "$10–$100 depending on county/state; some require newspaper publication ($40–$200 extra)",
+        "processing_time": "Same-day to 2 weeks; newspaper publication requirement adds 4–6 weeks in some states",
+        "prerequisites": "Legal name of business owner or entity, desired DBA name, business address, proof of entity registration (if LLC/Corp)",
+        "notes": "Required if your business name differs from your legal name (sole proprietor) or registered entity name"
+      },
+      {
+        "form_name": "State Sales Tax Permit",
+        "agency": "State Department of Revenue / Taxation",
+        "description": "Register to collect and remit sales tax if selling taxable goods or services",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/pay-taxes",
+        "deadline": "Before making your first taxable sale",
+        "online_only": false,
+        "fees": "Free in most states; some states charge $0–$25 registration fee",
+        "processing_time": "Immediate to 2 weeks depending on state; online applications typically processed within 1–3 business days",
+        "prerequisites": "EIN or SSN, state business registration, business address, estimated monthly sales volume, NAICS code / description of goods sold",
+        "notes": "Not all states have sales tax (e.g., Oregon, Montana, Delaware, New Hampshire, Alaska). Check your state's requirements."
+      },
+      {
+        "form_name": "Business License Application",
+        "agency": "City / County Government",
+        "description": "Obtain a general business license or permit to operate in your locality",
+        "url": "https://www.sba.gov/business-guide/launch-your-business/apply-licenses-permits",
+        "deadline": "Before commencing business operations",
+        "online_only": false,
+        "fees": "$25–$500+ depending on city, business type, and industry; annual renewal fees may apply",
+        "processing_time": "1–4 weeks; zoning approval or inspections may add additional time",
+        "prerequisites": "EIN, state business registration, proof of zoning compliance, lease agreement or proof of business location, industry-specific certifications if applicable",
+        "notes": "Requirements vary widely by location and industry. Use the SBA license and permit tool to find what you need."
+      }
+    ]
+  },
+  {
+    "event": "buying_a_house",
+    "label": "Buying a House",
+    "description": "Purchasing a home or residential property",
+    "forms": [
+      {
+        "form_name": "Homestead Exemption Application",
+        "agency": "County Property Appraiser / Tax Assessor",
+        "description": "Apply for a property tax exemption on your primary residence",
+        "url": "https://www.usa.gov/housing-help",
+        "deadline": "Varies by state/county; often within 1 year of purchase or by a specific annual deadline",
+        "online_only": false,
+        "fees": "Free to apply",
+        "processing_time": "4–8 weeks; exemption typically applies to the next tax year",
+        "prerequisites": "Recorded deed or closing documents, proof of residency (driver's license with property address), property tax ID / parcel number",
+        "notes": "Not all states offer homestead exemptions. Check your county's property appraiser website for the specific form and deadline."
+      },
+      {
+        "form_name": "USPS Change of Address (PS Form 3575)",
+        "agency": "United States Postal Service",
+        "description": "Forward your mail from your old address to your new home",
+        "url": "https://www.usps.com/manage/forward.htm",
+        "deadline": "Submit before or immediately after moving",
+        "online_only": true,
+        "fees": "$1.25 identity verification fee for online submission; free by mail",
+        "processing_time": "7–10 business days for forwarding to begin; temporary forwarding lasts 12 months",
+        "prerequisites": "Old address, new address, valid credit or debit card for identity verification (online), valid ID (in-person)",
+        "notes": "Online submission has a $1.25 identity verification fee"
+      },
+      {
+        "form_name": "IRS Form 8822 — Change of Address",
+        "agency": "Internal Revenue Service",
+        "description": "Notify the IRS of your new home address",
+        "url": "https://www.irs.gov/forms-pubs/about-form-8822",
+        "deadline": "File as soon as you move",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "4–6 weeks for IRS to process the address change",
+        "prerequisites": "Your SSN, old address, new address, signature (and spouse's signature if filing jointly)",
+        "notes": "Ensures you receive tax correspondence at your new address"
+      },
+      {
+        "form_name": "Utility Connection Applications",
+        "agency": "Local Utility Companies",
+        "description": "Set up electricity, gas, water, and other utility accounts at your new address",
+        "url": "https://www.usa.gov/help-with-utility-bills",
+        "deadline": "Schedule before move-in date",
+        "online_only": false,
+        "fees": "Connection fees vary; $0–$100 per utility; deposits may be required ($50–$200)",
+        "processing_time": "1–5 business days for new service activation; schedule at least 2 weeks before move-in",
+        "prerequisites": "New home address, move-in date, SSN (for credit check), government-issued ID, previous utility account info for transfer",
+        "notes": "Contact each utility provider directly. May require a deposit."
+      },
+      {
+        "form_name": "Homeowners Insurance Application",
+        "agency": "Insurance Provider",
+        "description": "Obtain homeowners insurance coverage (typically required by mortgage lender)",
+        "url": "https://www.usa.gov/housing-help#insurance",
+        "deadline": "Must be in place before closing",
+        "online_only": false,
+        "fees": "Annual premium varies: national average ~$1,800/year; paid at closing or monthly via escrow",
+        "processing_time": "Quote in 1–2 days; binding coverage same-day to 1 week; proof of insurance (binder) needed before closing",
+        "prerequisites": "Property address and details (sq ft, year built, roof age), closing date, mortgage lender info, personal info for underwriting",
+        "notes": "Your mortgage lender will require proof of insurance before closing. Shop multiple providers for best rates."
+      }
+    ]
+  },
+  {
+    "event": "getting_divorced",
+    "label": "Getting Divorced",
+    "description": "Going through a divorce and updating your legal and financial records",
+    "forms": [
+      {
+        "form_name": "Divorce Petition / Complaint",
+        "agency": "County Family Court / Superior Court",
+        "description": "File the initial petition to begin divorce proceedings",
+        "url": "https://www.usa.gov/divorce",
+        "deadline": "No federal deadline; residency requirements vary by state",
+        "online_only": false,
+        "fees": "$100-$400 depending on state and county",
+        "processing_time": "Uncontested: 30-90 days; contested: 6-18+ months",
+        "prerequisites": "Marriage certificate, proof of residency, government-issued ID, completed state-specific petition form",
+        "notes": "Divorce is handled at the state court level. Each state has its own forms and procedures. Most states require residency for 30 days to 1 year before filing."
+      },
+      {
+        "form_name": "Child Custody / Parenting Plan",
+        "agency": "County Family Court",
+        "description": "File a proposed parenting plan or custody agreement",
+        "url": "https://www.usa.gov/child-support-custody",
+        "deadline": "Typically filed with or shortly after the divorce petition",
+        "online_only": false,
+        "fees": "Typically included with divorce filing fee; standalone petition $50-$300",
+        "processing_time": "30 days to 12+ months depending on whether contested",
+        "prerequisites": "Divorce petition or separate custody filing, children's birth certificates, proof of residency, proposed parenting schedule",
+        "notes": "Required if the divorce involves minor children. Courts prioritize the best interests of the child. Each state provides free fillable forms."
+      },
+      {
+        "form_name": "Application for a Social Security Card (SS-5) — Name Change",
+        "agency": "Social Security Administration",
+        "description": "Revert to your previous name if desired after divorce",
+        "url": "https://www.ssa.gov/forms/ss-5.pdf",
+        "deadline": "No deadline; complete after divorce decree is finalized",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Typically 2 weeks from receipt",
+        "prerequisites": "Completed Form SS-5, divorce decree or court order showing name change, proof of identity (unexpired U.S. driver's license, state ID, or passport)",
+        "notes": "Must be completed before updating name with DMV or passport office. Limit of 3 name-change cards per year, 10 per lifetime. Some name changes can be done online at ssa.gov/myaccount."
+      },
+      {
+        "form_name": "IRS Form W-4 — Update Filing Status",
+        "agency": "Internal Revenue Service",
+        "description": "Update your tax withholding to reflect your new filing status",
+        "url": "https://www.irs.gov/forms-pubs/about-form-w-4",
+        "deadline": "Update with employer within 10 days of marital status change",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Employer implements within 1-2 pay periods",
+        "prerequisites": "Updated marital/filing status, estimated income and deductions",
+        "notes": "Submit to your employer, not to the IRS. Filing status changes from 'Married Filing Jointly' to 'Single' or 'Head of Household'. Use IRS Tax Withholding Estimator at irs.gov to determine correct withholding."
+      },
+      {
+        "form_name": "IRS Form 8822 — Change of Address",
+        "agency": "Internal Revenue Service",
+        "description": "Update your address with the IRS if you've moved",
+        "url": "https://www.irs.gov/forms-pubs/about-form-8822",
+        "deadline": "File as soon as you move to a new address",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "4-6 weeks for IRS to process",
+        "prerequisites": "New mailing address, SSN or ITIN, signature (both spouses if previously filed jointly)",
+        "notes": "Important if you previously filed jointly and now need IRS correspondence at your individual address. Can also update address on your next tax return."
+      }
+    ]
+  },
+  {
+    "event": "retiring",
+    "label": "Retiring",
+    "description": "Transitioning from working life to retirement",
+    "forms": [
+      {
+        "form_name": "Social Security Retirement Application",
+        "agency": "Social Security Administration",
+        "description": "Apply for Social Security retirement benefits",
+        "url": "https://www.ssa.gov/retirement",
+        "deadline": "Apply up to 4 months before you want benefits to start. Earliest eligibility is age 62.",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "A few weeks when applied online",
+        "prerequisites": "Social Security number, birth certificate or proof of birth, U.S. citizenship or lawful status proof, DD-214 if applicable, W-2 or self-employment tax returns for last year, bank account info for direct deposit",
+        "notes": "Apply online at ssa.gov/apply. Full retirement age is 66-67 depending on birth year. Benefits reduced ~30% if claimed at 62 vs. full retirement age. Can also apply by calling 1-800-772-1213."
+      },
+      {
+        "form_name": "Medicare Enrollment",
+        "agency": "Centers for Medicare & Medicaid Services",
+        "description": "Enroll in Medicare health insurance coverage",
+        "url": "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/ready-to-sign-up-for-part-a-part-b",
+        "deadline": "Initial Enrollment Period: 7-month window around your 65th birthday. General Enrollment: Jan 1 - Mar 31 each year.",
+        "online_only": false,
+        "fees": "Part A: Free for most (10+ years of Medicare taxes). Part B: ~$185/month (2025, adjusted by income).",
+        "processing_time": "Enrollment processed through SSA, typically a few weeks",
+        "prerequisites": "U.S. citizen or permanent legal resident for 5+ continuous years, age 65+ (or under 65 with qualifying disability), Social Security number",
+        "notes": "You sign up through Social Security, not Medicare directly. IMPORTANT: Missing your Initial Enrollment Period results in a 10% Part B premium increase per 12-month delay, lasting for life. General Enrollment Period coverage starts July 1."
+      },
+      {
+        "form_name": "CMS Form 40B — Application for Enrollment in Medicare Part B",
+        "agency": "Centers for Medicare & Medicaid Services",
+        "description": "Enroll in Medicare Part B (medical insurance) during a Special Enrollment Period",
+        "url": "https://www.cms.gov/medicare/cms-forms/cms-forms/downloads/cms40b-e.pdf",
+        "deadline": "Within 8 months of losing employer coverage",
+        "online_only": false,
+        "fees": "No filing fee; Part B monthly premium applies (approx. $185/month in 2025, adjusted annually by income)",
+        "processing_time": "Processed by SSA, typically a few weeks",
+        "prerequisites": "Eligible for Medicare Part A, within an enrollment period (Initial, General, or Special), employer coverage proof (CMS-L564) if applying during SEP",
+        "notes": "Use this form if you delayed Part B enrollment because you had employer coverage. Also need Form CMS-L564 (Request for Employment Information) signed by your employer. Late enrollment penalty: 10% premium increase per 12-month period delayed."
+      },
+      {
+        "form_name": "IRS Form W-4P / W-4R — Withholding from Pensions and Annuities",
+        "agency": "Internal Revenue Service",
+        "description": "Set up federal tax withholding on your pension or retirement distributions",
+        "url": "https://www.irs.gov/forms-pubs/about-form-w-4-p",
+        "deadline": "Submit to your pension plan administrator before or when distributions begin",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Payer implements within 1-2 payment cycles",
+        "prerequisites": "Pension/annuity or deferred compensation distribution, estimated total income for the year",
+        "notes": "Submit to payer, not the IRS. W-4P is for periodic (recurring) pension/annuity payments. W-4R is for one-time/nonperiodic distributions. Default withholding is 10% for nonperiodic, 20% for eligible rollover distributions."
+      },
+      {
+        "form_name": "Pension / 401(k) Distribution Request",
+        "agency": "Your Employer / Plan Administrator",
+        "description": "Request distributions from your employer-sponsored retirement plan",
+        "url": "https://www.dol.gov/agencies/ebsa",
+        "deadline": "Required Minimum Distributions must begin by April 1 of the year after turning 73",
+        "online_only": false,
+        "fees": "No government fee; plan administrators may charge processing fees. Early withdrawal penalty of 10% if under age 59.5 (with exceptions).",
+        "processing_time": "Typically 3-10 business days after plan administrator processes request",
+        "prerequisites": "Qualifying distribution event (retirement, separation from service, age 59.5+, or hardship), completed distribution form from your specific plan administrator",
+        "notes": "Distribution forms are plan-specific (Fidelity, Vanguard, Schwab, etc.). Contact your plan administrator directly. Consider tax implications and rollover options. The DOL/EBSA provides regulatory oversight."
+      }
+    ]
+  },
+  {
+    "event": "immigration_green_card",
+    "label": "Immigration / Green Card",
+    "description": "Applying for permanent residence (green card) in the United States",
+    "forms": [
+      {
+        "form_name": "USCIS Form I-130 — Petition for Alien Relative",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Petition filed by a U.S. citizen or permanent resident to establish a family relationship",
+        "url": "https://www.uscis.gov/i-130",
+        "deadline": "No deadline, but processing times vary. File as early as possible.",
+        "online_only": false,
+        "fees": "$535 filing fee",
+        "processing_time": "Immediate relatives: 5-15 months; family preference categories: years due to visa backlogs",
+        "prerequisites": "Petitioner must be U.S. citizen or LPR, proof of petitioner's status, proof of qualifying relationship (marriage/birth certificate), passport-style photos",
+        "notes": "Can be filed online through myUSCIS. Separate I-130 required for each relative. Check uscis.gov/feeschedule for current fees."
+      },
+      {
+        "form_name": "USCIS Form I-485 — Application to Register Permanent Residence",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Apply for a green card (adjustment of status) from within the United States",
+        "url": "https://www.uscis.gov/i-485",
+        "deadline": "Can be filed concurrently with I-130 for immediate relatives of U.S. citizens",
+        "online_only": false,
+        "fees": "$1,140 filing fee (includes biometrics for ages 14-78)",
+        "processing_time": "8-25+ months depending on category and field office",
+        "prerequisites": "Approved immigrant petition (I-130/I-140), immigrant visa immediately available, Form I-693 (medical exam), Form I-864 (Affidavit of Support), passport photos, birth certificate with English translation, evidence of legal U.S. entry",
+        "notes": "Must submit I-693 with I-485. Can concurrently file I-765 (work permit) and I-131 (travel document)."
+      },
+      {
+        "form_name": "USCIS Form I-765 — Application for Employment Authorization",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Apply for a work permit (Employment Authorization Document / EAD)",
+        "url": "https://www.uscis.gov/i-765",
+        "deadline": "Can be filed concurrently with I-485",
+        "online_only": false,
+        "fees": "$410 filing fee",
+        "processing_time": "3-7 months; auto-extensions available for some renewal cases",
+        "prerequisites": "Pending I-485 or other qualifying status, passport-style photos, government-issued ID",
+        "notes": "Online filing available. Allows you to work in the U.S. while your green card application is pending. Use eligibility category (c)(9) for AOS applicants."
+      },
+      {
+        "form_name": "USCIS Form I-131 — Application for Travel Document",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Apply for Advance Parole to travel outside the U.S. while your green card is pending",
+        "url": "https://www.uscis.gov/i-131",
+        "deadline": "Can be filed concurrently with I-485",
+        "online_only": false,
+        "fees": "$590 filing fee",
+        "processing_time": "3-6 months; expedite may be available for urgent travel",
+        "prerequisites": "Pending I-485 or other qualifying status, passport-style photos, travel itinerary or explanation",
+        "notes": "CRITICAL: Leaving the U.S. without approved Advance Parole while I-485 is pending may result in abandonment of your application. USCIS may issue a combo card (EAD + Advance Parole)."
+      },
+      {
+        "form_name": "USCIS Form I-693 — Report of Medical Examination and Vaccination Record",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Complete the required immigration medical examination",
+        "url": "https://www.uscis.gov/i-693",
+        "deadline": "Must be submitted with I-485. Valid for 2 years from civil surgeon's signature.",
+        "online_only": false,
+        "fees": "No USCIS fee; civil surgeon exam costs $200-$500+ (not covered by most insurance)",
+        "processing_time": "Civil surgeon exam: 1-2 visits",
+        "prerequisites": "Appointment with USCIS-designated civil surgeon, vaccination records, photo ID",
+        "notes": "The applicant does NOT fill this out — it must be completed by a USCIS-designated civil surgeon. Find one at https://my.uscis.gov/findadoctor. Required vaccinations include MMR, Varicella, Tdap, Influenza, COVID-19."
+      },
+      {
+        "form_name": "USCIS Form I-864 — Affidavit of Support",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "The petitioning sponsor demonstrates financial ability to support the immigrant",
+        "url": "https://www.uscis.gov/i-864",
+        "deadline": "Required at time of I-485 filing or interview",
+        "online_only": false,
+        "fees": "No USCIS filing fee",
+        "processing_time": "Reviewed as part of I-485 adjudication",
+        "prerequisites": "Sponsor must be U.S. citizen or LPR age 18+, domiciled in the U.S., federal tax returns for 3 most recent years, proof of income (pay stubs, W-2, employment letter)",
+        "notes": "Legally binding contract — sponsor agrees to maintain immigrant at 125% of Federal Poverty Guidelines (~$25,550/year for household of 2). Obligation lasts until immigrant becomes U.S. citizen or earns 40 qualifying quarters of work."
+      }
+    ]
+  },
+  {
+    "event": "child_starting_school",
+    "label": "Child Starting School",
+    "description": "Enrolling your child in school for the first time",
+    "forms": [
+      {
+        "form_name": "School Enrollment Application",
+        "agency": "Local School District",
+        "description": "Register your child for school in your district",
+        "url": "https://www.usa.gov/education",
+        "deadline": "Varies by district; kindergarten registration typically opens March-May for the following fall",
+        "online_only": false,
+        "fees": "Free — public school enrollment is free",
+        "processing_time": "Typically 1-5 business days",
+        "prerequisites": "Child's birth certificate or proof of age, proof of residency, immunization records, previous school records (if transferring), parent/guardian ID",
+        "notes": "All children have the right to enroll in public school regardless of immigration status. Contact your local school district for forms and requirements."
+      },
+      {
+        "form_name": "Immunization Records Request",
+        "agency": "State Health Department / Pediatrician",
+        "description": "Obtain official immunization records required for school enrollment",
+        "url": "https://www.cdc.gov/vaccines/php/requirements-laws/state-vaccination-requirements.html",
+        "deadline": "Required at time of school enrollment; some states allow a 30-day grace period",
+        "online_only": false,
+        "fees": "Free from most state registries; pediatrician offices may charge $10-$25",
+        "processing_time": "Immediate to a few days for state registry lookups",
+        "prerequisites": "Child's immunization history from pediatrician, access to state immunization registry",
+        "notes": "All 50 states require vaccinations for school entry; specific requirements and exemptions vary. All states allow medical exemptions; some allow religious or philosophical exemptions."
+      },
+      {
+        "form_name": "USDA Free and Reduced Price School Meals Application",
+        "agency": "U.S. Department of Agriculture / School District",
+        "description": "Apply for free or reduced-price breakfast and lunch for your child",
+        "url": "https://www.fns.usda.gov/schoolmeals/model-application",
+        "deadline": "Can be submitted at any time during the school year; new application needed each school year",
+        "online_only": false,
+        "fees": "Free to apply",
+        "processing_time": "Schools must process within 10 working days of receipt",
+        "prerequisites": "Household income information, number of household members, child's name and school, SSN of adult household member (or indicate no SSN)",
+        "notes": "Free meals at 130% or below Federal Poverty Guidelines; reduced-price at 185% or below. Children receiving SNAP, TANF, or FDPIR are automatically eligible. Many districts now offer free meals to all students via Community Eligibility Provision."
+      },
+      {
+        "form_name": "Proof of Residency Documentation",
+        "agency": "Local School District",
+        "description": "Provide documentation proving you reside within the school district boundaries",
+        "url": "https://www.usa.gov/education",
+        "deadline": "Required at time of enrollment; some districts require annual verification",
+        "online_only": false,
+        "fees": "Free; notarization may cost $5-$15 if an affidavit is needed",
+        "processing_time": "Verified at time of enrollment",
+        "prerequisites": "Utility bill in parent/guardian name, lease or mortgage statement, property tax bill, or government-issued ID with current address",
+        "notes": "Requirements set by each school district. The McKinney-Vento Act protects homeless students' enrollment rights even without traditional residency documentation."
+      },
+      {
+        "form_name": "School Health / Physical Examination Form",
+        "agency": "State Health Department / School District",
+        "description": "Provide a recent physical exam form signed by your child's doctor",
+        "url": "https://www.cdc.gov/vaccines/hcp/imz-schedules/child-adolescent-age.html",
+        "deadline": "Required before the first day of school or within a grace period",
+        "online_only": false,
+        "fees": "Covered by most insurance under preventive care; without insurance $100-$300",
+        "processing_time": "Completed at the physician visit; forms available same day",
+        "prerequisites": "Appointment with licensed healthcare provider, child's immunization records, insurance card if applicable",
+        "notes": "The physical exam form is state-specific — contact your school district or state Department of Education for the required form. Schedule the exam well in advance."
+      }
+    ]
+  },
+  {
+    "event": "sell_car",
+    "label": "Selling Your Car",
+    "description": "Selling a personal vehicle requires proper title transfer, registration updates, and tax reporting to complete the transaction legally.",
+    "forms": [
+      {
+        "form_name": "Vehicle Title Transfer",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Transfers legal ownership of the vehicle from seller to buyer by signing over the title certificate",
+        "url": "https://www.dmv.org/buy-sell/used-cars/paper-work-when-selling-a-car.php",
+        "deadline": "at time of sale",
+        "online_only": false,
+        "fees": "Varies by state, typically $5-50",
+        "processing_time": "Immediate when done properly",
+        "prerequisites": "Original vehicle title, valid ID, odometer reading",
+        "notes": "Both buyer and seller must sign; incomplete transfers can leave seller liable for future violations"
+      },
+      {
+        "form_name": "Notice of Transfer and Release of Liability",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Notifies the DMV that you have sold the vehicle and releases you from liability for future tickets or accidents",
+        "url": "https://www.dmv.ca.gov/portal/vehicle-registration/new-registration/transfer-ownership/",
+        "deadline": "within 5-30 days of sale (varies by state)",
+        "online_only": false,
+        "fees": "Free to $10",
+        "processing_time": "1-2 weeks",
+        "prerequisites": "Completed sale, buyer information, sale date and price",
+        "notes": "Critical for liability protection; some states call this a 'bill of sale' filing"
+      },
+      {
+        "form_name": "Vehicle Registration Cancellation",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Cancels your vehicle registration and may provide partial refund of unused registration fees",
+        "url": "https://www.dmv.org/vehicle-registration.php",
+        "deadline": "within 30 days of sale",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-4 weeks for refund processing",
+        "prerequisites": "Proof of sale, current registration certificate",
+        "notes": "Return license plates in states that require it; keep documentation for refund claims"
+      },
+      {
+        "form_name": "Insurance Policy Cancellation",
+        "agency": "Auto Insurance Company",
+        "description": "Cancels auto insurance coverage for the sold vehicle to avoid unnecessary premium payments",
+        "url": "https://www.insurance.com",
+        "deadline": "as soon as possible after sale",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "Immediate",
+        "prerequisites": "Policy number, sale date, proof of sale",
+        "notes": "May receive partial premium refund; maintain continuous coverage if you have other vehicles"
+      },
+      {
+        "form_name": "Form 1040 Schedule D",
+        "agency": "Internal Revenue Service",
+        "description": "Reports capital gains or losses from the vehicle sale if sold for more or significantly less than basis",
+        "url": "https://www.irs.gov/forms-pubs/about-schedule-d-form-1040",
+        "deadline": "by April 15th of following tax year",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Part of annual tax return",
+        "prerequisites": "Original purchase price, sale price, records of improvements",
+        "notes": "Usually no tax impact for personal vehicles sold at a loss; consult tax professional for valuable cars"
+      },
+      {
+        "form_name": "Bill of Sale",
+        "agency": "No specific agency (legal document)",
+        "description": "Creates written record of the transaction with sale price, vehicle details, and both parties' information",
+        "url": "https://www.dmv.org/buy-sell/bill-of-sale-form.php",
+        "deadline": "at time of sale",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Immediate",
+        "prerequisites": "Vehicle identification number, buyer and seller information",
+        "notes": "Required by law in many states; protects both parties and may be needed for tax purposes"
+      },
+      {
+        "form_name": "Lien Release Documentation",
+        "agency": "Lending Institution/State DMV",
+        "description": "Obtains clear title by paying off any outstanding loan and getting lien release from lender",
+        "url": "https://www.dmv.org/buy-sell/used-cars/liens-on-used-cars.php",
+        "deadline": "before sale can be completed",
+        "online_only": false,
+        "fees": "Varies, typically $10-25",
+        "processing_time": "1-3 weeks",
+        "prerequisites": "Loan payoff, lender cooperation",
+        "notes": "Cannot legally sell vehicle with active lien without lender involvement; some states allow simultaneous payoff at sale"
+      }
+    ]
+  },
+  {
+    "event": "antarctica_educational_expedition",
+    "label": "Educational Expedition to Antarctica with Students",
+    "description": "Organizing and leading a group of high school students on an educational expedition to Antarctica.",
+    "forms": [
+      {
+        "form_name": "Advance Passenger Information System (APIS)",
+        "agency": "U.S. Customs and Border Protection",
+        "description": "Required passenger and crew manifest information for international travel",
+        "url": "https://www.cbp.gov/travel/clearing-cbp/apis",
+        "deadline": "72 hours before departure",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "Immediate",
+        "prerequisites": "Valid passports for all participants",
+        "notes": "Must be submitted by airline or charter operator"
+      },
+      {
+        "form_name": "Environmental Impact Assessment",
+        "agency": "Environmental Protection Agency (Antarctic Treaty Compliance)",
+        "description": "Required environmental review for all Antarctic activities under the Antarctic Conservation Act",
+        "url": "https://www.epa.gov/international-cooperation/antarctica",
+        "deadline": "6-12 months before travel",
+        "online_only": false,
+        "fees": "Varies by scope",
+        "processing_time": "3-6 months",
+        "prerequisites": "Detailed expedition plan and itinerary",
+        "notes": "Required under the Protocol on Environmental Protection to the Antarctic Treaty"
+      },
+      {
+        "form_name": "DS-82 or DS-11 Passport Application",
+        "agency": "U.S. Department of State",
+        "description": "Valid U.S. passport required for international travel for each student and chaperone",
+        "url": "https://travel.state.gov/content/travel/en/passports.html",
+        "deadline": "6-8 weeks before travel (expedited available)",
+        "online_only": false,
+        "fees": "$130-$165 per passport",
+        "processing_time": "6-8 weeks standard, 2-3 weeks expedited",
+        "prerequisites": "Birth certificate, photo ID, passport photos",
+        "notes": "Minors require parental consent forms"
+      },
+      {
+        "form_name": "Student Travel Consent Form (Parental Permission)",
+        "agency": "Local School District",
+        "description": "Notarized parental consent for minor students traveling internationally",
+        "url": "Contact local school district",
+        "deadline": "30 days before travel",
+        "online_only": false,
+        "fees": "Notary fees only",
+        "processing_time": "Same day with proper documentation",
+        "prerequisites": "Parent/guardian identification and student information",
+        "notes": "May require both parents' signatures for divorced parents"
+      },
+      {
+        "form_name": "Antarctic Tour Operator License Verification",
+        "agency": "International Association of Antarctica Tour Operators",
+        "description": "Verification that tour operator has proper Antarctic Treaty compliance and insurance",
+        "url": "https://iaato.org",
+        "deadline": "Before booking expedition",
+        "online_only": true,
+        "fees": "Free to verify",
+        "processing_time": "Immediate verification",
+        "prerequisites": "Tour operator name and registration number",
+        "notes": "Ensure operator is IAATO member for legitimate Antarctic access"
+      },
+      {
+        "form_name": "Group Travel Registration",
+        "agency": "U.S. Department of State (STEP Program)",
+        "description": "Register group travel with nearest U.S. Embassy for emergency assistance",
+        "url": "https://step.state.gov",
+        "deadline": "Before departure",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "Immediate",
+        "prerequisites": "Passport numbers and travel itinerary for all participants",
+        "notes": "Critical for emergency evacuation assistance in remote locations"
+      },
+      {
+        "form_name": "Educational Travel Insurance Documentation",
+        "agency": "Private Insurance Provider (as required by school district)",
+        "description": "Comprehensive travel insurance including medical evacuation coverage for Antarctic travel",
+        "url": "Contact insurance providers",
+        "deadline": "Before departure",
+        "online_only": false,
+        "fees": "$200-$500 per person",
+        "processing_time": "1-5 business days",
+        "prerequisites": "Participant information and travel dates",
+        "notes": "Medical evacuation from Antarctica can cost $100,000+ - comprehensive coverage essential"
+      },
+      {
+        "form_name": "Medical Clearance Forms",
+        "agency": "Licensed Medical Provider",
+        "description": "Medical examination and clearance for each participant for extreme environment travel",
+        "url": "Contact healthcare provider",
+        "deadline": "30-60 days before travel",
+        "online_only": false,
+        "fees": "Varies by provider",
+        "processing_time": "1-2 weeks",
+        "prerequisites": "Physical examination and medical history review",
+        "notes": "May require specialist clearance for students with pre-existing conditions"
+      },
+      {
+        "form_name": "Field Trip Authorization",
+        "agency": "Local School District Administration",
+        "description": "Official school district approval for international educational field trip",
+        "url": "Contact school district administration",
+        "deadline": "3-6 months before travel",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-8 weeks",
+        "prerequisites": "Educational objectives, safety plan, and budget approval",
+        "notes": "May require school board approval for high-risk international travel"
+      }
+    ]
+  }
+]

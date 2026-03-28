@@ -1,0 +1,74 @@
+{
+  "Application for a Social Security Card (SS-5)": {
+    "pdf_url": "https://www.ssa.gov/forms/ss-5.pdf",
+    "fillable": true
+  },
+  "Application for a Social Security Card (SS-5) — Name Change": {
+    "pdf_url": "https://www.ssa.gov/forms/ss-5.pdf",
+    "fillable": true
+  },
+  "Application for a Social Security Card (SS-5) — Newborn": {
+    "pdf_url": "https://www.ssa.gov/forms/ss-5.pdf",
+    "fillable": true
+  },
+  "IRS Form W-4 — Employee's Withholding Certificate": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+    "fillable": true
+  },
+  "IRS Form W-4 — Update Withholding for New Dependent": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+    "fillable": true
+  },
+  "IRS Form W-4 — Update Filing Status": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+    "fillable": true
+  },
+  "IRS Form 8822 — Change of Address": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/f8822.pdf",
+    "fillable": true
+  },
+  "IRS Form 56 — Notice Concerning Fiduciary Relationship": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/f56.pdf",
+    "fillable": true
+  },
+  "IRS Form SS-4 — Application for Employer Identification Number": {
+    "pdf_url": "https://www.irs.gov/pub/irs-pdf/fss4.pdf",
+    "fillable": true
+  },
+  "U.S. Passport Name Change (DS-5504)": {
+    "pdf_url": "https://eforms.state.gov/Forms/ds5504.pdf",
+    "fillable": true
+  },
+  "U.S. Passport Renewal (DS-82)": {
+    "pdf_url": "https://eforms.state.gov/Forms/ds82.pdf",
+    "fillable": true
+  },
+  "National Voter Registration Form": {
+    "pdf_url": "https://www.eac.gov/sites/default/files/eac_assets/1/6/Federal_Voter_Registration_ENG.pdf",
+    "fillable": true
+  },
+  "USCIS Form I-485 — Application to Register Permanent Residence": {
+    "pdf_url": "https://www.uscis.gov/sites/default/files/document/forms/i-485.pdf",
+    "fillable": true
+  },
+  "USCIS Form I-765 — Application for Employment Authorization": {
+    "pdf_url": "https://www.uscis.gov/sites/default/files/document/forms/i-765.pdf",
+    "fillable": true
+  },
+  "USCIS Form I-131 — Application for Travel Document": {
+    "pdf_url": "https://www.uscis.gov/sites/default/files/document/forms/i-131.pdf",
+    "fillable": true
+  },
+  "USCIS Form I-864 — Affidavit of Support": {
+    "pdf_url": "https://www.uscis.gov/sites/default/files/document/forms/i-864.pdf",
+    "fillable": true
+  },
+  "CMS-40B Application for Enrollment in Medicare Part B": {
+    "pdf_url": "https://www.cms.gov/medicare/cms-forms/cms-forms/downloads/cms40b-e.pdf",
+    "fillable": true
+  },
+  "SSA-1 — Application for Retirement Benefits": {
+    "pdf_url": "https://www.ssa.gov/forms/ssa-1-bk.pdf",
+    "fillable": true
+  }
+}
