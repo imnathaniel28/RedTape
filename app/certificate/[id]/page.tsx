@@ -156,7 +156,7 @@ export default function CertificatePage() {
           </div>
 
           <p className="text-xs text-muted-foreground pt-6">
-            Powered by Bureaucracy Buster
+            Powered by RedTape
           </p>
         </div>
       </div>

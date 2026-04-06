@@ -1,4 +1,4 @@
-import { getDb } from "./db";
+import { queryOne, queryAll, execute } from "./db";
 
 export interface DeadlineInfo {
   id: number;
@@ -14,33 +14,27 @@ export interface DeadlineInfo {
  * Parses common patterns like "within 30 days", "within 60 days", etc.
  * Uses the case creation date as the reference point.
  */
-export function generateDeadlinesForCase(caseId: number): number {
-  const db = getDb();
-
-  const caseRow = db.prepare("SELECT created_at FROM cases WHERE id = ?").get(caseId) as
-    | { created_at: string }
-    | undefined;
+export async function generateDeadlinesForCase(caseId: number): Promise<number> {
+  const caseRow = await queryOne<{ created_at: string }>(
+    "SELECT created_at FROM cases WHERE id = ?",
+    [caseId]
+  );
   if (!caseRow) return 0;
 
   const caseDate = new Date(caseRow.created_at);
 
-  const forms = db
-    .prepare("SELECT id, form_name, deadline FROM case_forms WHERE case_id = ?")
-    .all(caseId) as Array<{
+  const forms = await queryAll<{
     id: number;
     form_name: string;
     deadline: string | null;
-  }>;
+  }>("SELECT id, form_name, deadline FROM case_forms WHERE case_id = ?", [caseId]);
 
   // Check existing deadlines to avoid duplicates
-  const existing = db
-    .prepare("SELECT case_form_id FROM deadlines WHERE case_id = ?")
-    .all(caseId) as Array<{ case_form_id: number | null }>;
-  const existingFormIds = new Set(existing.map((e) => e.case_form_id));
-
-  const insert = db.prepare(
-    "INSERT INTO deadlines (case_id, case_form_id, title, due_date) VALUES (?, ?, ?, ?)"
+  const existing = await queryAll<{ case_form_id: number | null }>(
+    "SELECT case_form_id FROM deadlines WHERE case_id = ?",
+    [caseId]
   );
+  const existingFormIds = new Set(existing.map((e) => e.case_form_id));
 
   let created = 0;
   for (const form of forms) {
@@ -49,11 +43,9 @@ export function generateDeadlinesForCase(caseId: number): number {
     const dueDate = parseDeadlineText(form.deadline, caseDate);
     if (!dueDate) continue;
 
-    insert.run(
-      caseId,
-      form.id,
-      form.form_name,
-      dueDate.toISOString().split("T")[0]
+    await execute(
+      "INSERT INTO deadlines (case_id, case_form_id, title, due_date) VALUES (?, ?, ?, ?)",
+      [caseId, form.id, form.form_name, dueDate.toISOString().split("T")[0]]
     );
     created++;
   }
@@ -124,32 +116,27 @@ function parseDeadlineText(text: string, refDate: Date): Date | null {
   return null;
 }
 
-export function getUpcomingDeadlines(limit = 5): DeadlineInfo[] {
-  const db = getDb();
-  return db
-    .prepare(
-      `SELECT d.* FROM deadlines d
-       JOIN cases c ON d.case_id = c.id
-       WHERE c.state = 'active'
-       ORDER BY d.due_date ASC
-       LIMIT ?`
-    )
-    .all(limit) as DeadlineInfo[];
+export async function getUpcomingDeadlines(userId: string, limit = 5): Promise<DeadlineInfo[]> {
+  return queryAll<DeadlineInfo>(
+    `SELECT d.* FROM deadlines d
+     JOIN cases c ON d.case_id = c.id
+     WHERE c.state = 'active' AND c.user_id = ?
+     ORDER BY d.due_date ASC
+     LIMIT ?`,
+    [userId, limit]
+  );
 }
 
-export function getUrgentDeadlines(): DeadlineInfo[] {
-  const db = getDb();
-  const now = new Date().toISOString().split("T")[0];
+export async function getUrgentDeadlines(userId: string): Promise<DeadlineInfo[]> {
   const sevenDays = new Date();
   sevenDays.setDate(sevenDays.getDate() + 7);
   const sevenDaysStr = sevenDays.toISOString().split("T")[0];
 
-  return db
-    .prepare(
-      `SELECT d.* FROM deadlines d
-       JOIN cases c ON d.case_id = c.id
-       WHERE c.state = 'active' AND d.due_date <= ?
-       ORDER BY d.due_date ASC`
-    )
-    .all(sevenDaysStr) as DeadlineInfo[];
+  return queryAll<DeadlineInfo>(
+    `SELECT d.* FROM deadlines d
+     JOIN cases c ON d.case_id = c.id
+     WHERE c.state = 'active' AND c.user_id = ? AND d.due_date <= ?
+     ORDER BY d.due_date ASC`,
+    [userId, sevenDaysStr]
+  );
 }

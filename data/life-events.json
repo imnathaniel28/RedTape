@@ -898,5 +898,338 @@
         "notes": "May require school board approval for high-risk international travel"
       }
     ]
+  },
+  {
+    "event": "legal_name_change",
+    "label": "Legal Name Change",
+    "description": "Process to legally change your name through court petition and update all government records and documents.",
+    "forms": [
+      {
+        "form_name": "Petition for Name Change",
+        "agency": "Local Superior Court or Family Court",
+        "description": "Primary legal document to request court approval for name change",
+        "url": "https://www.courts.ca.gov/selfhelp-namechange.htm",
+        "deadline": "No deadline, but start of process",
+        "online_only": false,
+        "fees": "$435-$465 (varies by state/county)",
+        "processing_time": "4-8 weeks after hearing",
+        "prerequisites": "Valid identification, reason for name change",
+        "notes": "Requirements vary significantly by state; some states require publication in newspaper"
+      },
+      {
+        "form_name": "Social Security Card Replacement (SS-5)",
+        "agency": "Social Security Administration",
+        "description": "Update Social Security records with new legal name",
+        "url": "https://www.ssa.gov/forms/ss-5.pdf",
+        "deadline": "As soon as possible after court order",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "10-14 business days",
+        "prerequisites": "Court order for name change, current ID",
+        "notes": "Must be done before updating other federal documents"
+      },
+      {
+        "form_name": "U.S. Passport Application (DS-82 or DS-11)",
+        "agency": "U.S. Department of State",
+        "description": "Update passport with new legal name",
+        "url": "https://travel.state.gov/content/travel/en/passports/need-passport/change-correct.html",
+        "deadline": "Before international travel",
+        "online_only": false,
+        "fees": "$130-$165 depending on service",
+        "processing_time": "6-11 weeks standard, 2-3 weeks expedited",
+        "prerequisites": "Court order, updated Social Security card",
+        "notes": "Use DS-82 if name change within 1 year of passport issuance"
+      },
+      {
+        "form_name": "Driver's License/State ID Update",
+        "agency": "State Department of Motor Vehicles",
+        "description": "Update driver's license and vehicle registration with new name",
+        "url": "https://www.dmv.ca.gov/portal/customer-service/dmv-forms-publications/",
+        "deadline": "Within 30 days of name change",
+        "online_only": false,
+        "fees": "$32-$39 (varies by state)",
+        "processing_time": "Same day in-person, 2-4 weeks by mail",
+        "prerequisites": "Court order, updated Social Security card",
+        "notes": "Bring multiple forms of ID; some states allow online updates"
+      },
+      {
+        "form_name": "Voter Registration Update",
+        "agency": "State/County Election Office",
+        "description": "Update voter registration records with new legal name",
+        "url": "https://www.eac.gov/voters/register-and-vote-in-your-state",
+        "deadline": "Before next election participation",
+        "online_only": true,
+        "fees": "Free",
+        "processing_time": "2-4 weeks",
+        "prerequisites": "Updated driver's license or state ID",
+        "notes": "Can often be done online; deadlines vary before elections"
+      },
+      {
+        "form_name": "IRS Name Change Notification",
+        "agency": "Internal Revenue Service",
+        "description": "Notify IRS of name change to avoid tax filing issues",
+        "url": "https://www.irs.gov/individuals/individual-taxpayer-identification-number/how-to-change-your-name-with-the-irs",
+        "deadline": "Before filing next tax return",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Automatic once SSA updates",
+        "prerequisites": "Updated Social Security Administration records",
+        "notes": "Usually automatic when SSA is updated, but verify before tax filing"
+      },
+      {
+        "form_name": "Immigration Document Updates (Form I-90 or N-565)",
+        "agency": "U.S. Citizenship and Immigration Services",
+        "description": "Update green card or naturalization certificate with new name",
+        "url": "https://www.uscis.gov/i-90",
+        "deadline": "As soon as possible",
+        "online_only": true,
+        "fees": "$540 (I-90) or $555 (N-565)",
+        "processing_time": "8-13 months",
+        "prerequisites": "Court order for name change",
+        "notes": "Only required for non-U.S. citizens or those needing updated naturalization certificate"
+      },
+      {
+        "form_name": "Federal Benefits Update (VA, Medicare, etc.)",
+        "agency": "Various Federal Agencies",
+        "description": "Update name on federal benefits including VA, Medicare, Social Security benefits",
+        "url": "https://www.va.gov/resources/how-to-update-your-personal-information-with-va/",
+        "deadline": "Within 30 days",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-6 weeks",
+        "prerequisites": "Court order, updated Social Security records",
+        "notes": "Contact each agency separately; some updates may be automatic"
+      },
+      {
+        "form_name": "Professional License Updates",
+        "agency": "State Professional Licensing Boards",
+        "description": "Update professional licenses (medical, legal, real estate, etc.) with new name",
+        "url": "https://www.fsmb.org/contact/state-medical-boards/",
+        "deadline": "Within 30-60 days (varies by profession)",
+        "online_only": false,
+        "fees": "$25-$100 (varies by license type)",
+        "processing_time": "2-8 weeks",
+        "prerequisites": "Court order, updated state ID",
+        "notes": "Requirements vary significantly by profession and state"
+      },
+      {
+        "form_name": "Property Records Update",
+        "agency": "County Recorder or Register of Deeds",
+        "description": "Update property deeds and titles with new legal name",
+        "url": "https://www.naco.org/county-services/find-county-services",
+        "deadline": "No specific deadline, but recommended soon after name change",
+        "online_only": false,
+        "fees": "$15-$50 recording fees",
+        "processing_time": "2-4 weeks",
+        "prerequisites": "Court order, current property documents",
+        "notes": "May require new deed preparation; consult attorney for complex property holdings"
+      }
+    ]
+  },
+  {
+    "event": "space_travel_and_tax_filing",
+    "label": "Space Travel and Tax Filing",
+    "description": "Taking a commercial space flight while needing to file annual tax returns.",
+    "forms": [
+      {
+        "form_name": "Form 1040 - U.S. Individual Income Tax Return",
+        "agency": "Internal Revenue Service (IRS)",
+        "description": "Annual federal income tax return for individuals to report income, deductions, and calculate tax owed or refund due",
+        "url": "https://www.irs.gov/forms-pubs/about-form-1040",
+        "deadline": "April 15th (or next business day)",
+        "online_only": false,
+        "fees": "Free to file directly, fees vary for tax software",
+        "processing_time": "21 days for e-filed returns with direct deposit",
+        "prerequisites": "W-2s, 1099s, and other tax documents from previous year",
+        "notes": "Can request extension until October 15th using Form 4868, but taxes owed are still due April 15th"
+      },
+      {
+        "form_name": "Form 4868 - Application for Automatic Extension of Time to File",
+        "agency": "Internal Revenue Service (IRS)",
+        "description": "Request automatic 6-month extension to file tax return if you cannot meet the April deadline",
+        "url": "https://www.irs.gov/forms-pubs/about-form-4868",
+        "deadline": "By original tax filing deadline (April 15th)",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "Automatic approval if filed timely",
+        "prerequisites": "Estimate of tax owed and payment if applicable",
+        "notes": "Extension is for filing only, not for paying taxes owed"
+      },
+      {
+        "form_name": "FAA Form 8500-8 - Report of Medical History",
+        "agency": "Federal Aviation Administration (FAA)",
+        "description": "Medical examination required for commercial space flight participants to ensure fitness for space travel",
+        "url": "https://www.faa.gov/licenses_certificates/medical_certification/",
+        "deadline": "Before space flight departure",
+        "online_only": false,
+        "fees": "$75-$200 depending on medical examiner",
+        "processing_time": "Same day if no issues, up to 60 days if deferred",
+        "prerequisites": "Medical records and completed medical history form",
+        "notes": "May require special issuance for space flight activities"
+      },
+      {
+        "form_name": "State Income Tax Return",
+        "agency": "State Department of Revenue (varies by state)",
+        "description": "State income tax filing requirement that varies by state of residence",
+        "url": "https://www.taxadmin.org/state-tax-forms",
+        "deadline": "Typically April 15th, varies by state",
+        "online_only": false,
+        "fees": "Free to low cost, varies by state",
+        "processing_time": "2-8 weeks depending on state",
+        "prerequisites": "Federal tax information and state-specific documents",
+        "notes": "Not all states require income tax filing; check your state's requirements"
+      },
+      {
+        "form_name": "TSA PreCheck Application",
+        "agency": "Transportation Security Administration (TSA)",
+        "description": "Background check and expedited security screening program that may be useful for space travel logistics",
+        "url": "https://www.tsa.gov/precheck",
+        "deadline": "At least 2 weeks before travel",
+        "online_only": false,
+        "fees": "$78 for 5 years",
+        "processing_time": "3-5 days after in-person appointment",
+        "prerequisites": "Valid ID, citizenship documentation, background check",
+        "notes": "Helpful for any commercial flights to space launch facilities"
+      },
+      {
+        "form_name": "Passport Application (Form DS-11 or DS-82)",
+        "agency": "U.S. Department of State",
+        "description": "Valid passport required for international travel and may be needed depending on space launch location",
+        "url": "https://travel.state.gov/content/travel/en/passports.html",
+        "deadline": "6-8 weeks before travel (routine service)",
+        "online_only": false,
+        "fees": "$130-165 depending on application type",
+        "processing_time": "6-8 weeks routine, 2-3 weeks expedited",
+        "prerequisites": "Proof of citizenship, valid ID, passport photo",
+        "notes": "Some commercial space flights launch from international locations"
+      },
+      {
+        "form_name": "Travel Insurance Documentation",
+        "agency": "Private Insurance Companies",
+        "description": "Specialized space travel insurance coverage for high-risk activities not covered by standard policies",
+        "url": "https://www.insuremytrip.com",
+        "deadline": "Before space flight departure",
+        "online_only": true,
+        "fees": "$500-5000+ depending on coverage",
+        "processing_time": "Immediate to 48 hours",
+        "prerequisites": "Medical examination results, travel itinerary",
+        "notes": "Standard travel insurance excludes space travel; specialized coverage required"
+      }
+    ]
+  },
+  {
+    "event": "suing_apartment_complex_ada_senior",
+    "label": "Suing Apartment Complex Over ADA Senior Rights",
+    "description": "Filing a lawsuit against an apartment complex for violations of ADA accommodations for senior tenants.",
+    "forms": [
+      {
+        "form_name": "HUD Fair Housing Complaint (Form HUD-903)",
+        "agency": "U.S. Department of Housing and Urban Development",
+        "description": "File a federal complaint for housing discrimination based on disability or age before pursuing litigation",
+        "url": "https://www.hud.gov/program_offices/fair_housing_equal_opp/online-complaint",
+        "deadline": "within 1 year of the discriminatory act",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "100 days for investigation",
+        "prerequisites": "Documentation of discriminatory acts or ADA violations",
+        "notes": "Must exhaust administrative remedies before federal court in most cases"
+      },
+      {
+        "form_name": "Civil Rights Complaint",
+        "agency": "State Attorney General's Office",
+        "description": "File a state-level civil rights complaint for housing discrimination based on disability or age",
+        "url": "https://www.naag.org/find-my-ag/",
+        "deadline": "varies by state, typically 180 days to 3 years",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "60-180 days",
+        "prerequisites": "Evidence of discrimination or ADA violations",
+        "notes": "State requirements vary - check local fair housing laws"
+      },
+      {
+        "form_name": "Pro Se Civil Complaint Form",
+        "agency": "U.S. District Court or State Court",
+        "description": "Initiate federal or state court lawsuit against apartment complex for ADA violations",
+        "url": "https://www.uscourts.gov/forms/pro-se-forms",
+        "deadline": "within statute of limitations (2-6 years depending on claims)",
+        "online_only": false,
+        "fees": "$402 federal filing fee (waiver available for low income)",
+        "processing_time": "varies, typically 1-3 years to resolution",
+        "prerequisites": "Exhaustion of administrative remedies may be required",
+        "notes": "Consider hiring an attorney - ADA cases are complex"
+      },
+      {
+        "form_name": "Application to Proceed In Forma Pauperis (Form AO 239)",
+        "agency": "U.S. District Court",
+        "description": "Request waiver of court filing fees if you cannot afford them",
+        "url": "https://www.uscourts.gov/forms/fee-waiver-forms",
+        "deadline": "file with initial complaint or as soon as possible",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-4 weeks",
+        "prerequisites": "Financial hardship documentation and income statements",
+        "notes": "Must provide detailed financial information under penalty of perjury"
+      },
+      {
+        "form_name": "Request for Reasonable Accommodation",
+        "agency": "Direct to Apartment Complex",
+        "description": "Formal written request to landlord for ADA accommodations with medical documentation",
+        "url": "https://www.hud.gov/program_offices/fair_housing_equal_opp/reasonable_accommodations_and_modifications",
+        "deadline": "as soon as possible",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "30 days for landlord response",
+        "prerequisites": "Medical documentation of disability and need for accommodation",
+        "notes": "Keep copies - denial or non-response strengthens discrimination case"
+      },
+      {
+        "form_name": "EEOC Mediation Request",
+        "agency": "Equal Employment Opportunity Commission",
+        "description": "Request mediation services for disability discrimination dispute resolution",
+        "url": "https://www.eeoc.gov/federal-sector/overview-federal-sector-eeo-complaint-process",
+        "deadline": "within 45 days of filing complaint",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "60-90 days",
+        "prerequisites": "Filed discrimination complaint",
+        "notes": "Voluntary process but can lead to faster resolution"
+      },
+      {
+        "form_name": "Local Housing Authority Complaint",
+        "agency": "Local Housing Authority",
+        "description": "File complaint with local housing authority if complex receives federal housing funds",
+        "url": "varies by locality",
+        "deadline": "as soon as possible",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "30-90 days",
+        "prerequisites": "Evidence of violations and determination if complex receives federal funds",
+        "notes": "Check if apartment complex participates in Section 8 or other federal programs"
+      },
+      {
+        "form_name": "State Fair Housing Agency Complaint",
+        "agency": "State Fair Housing Enforcement Agency",
+        "description": "File with state agency that enforces fair housing laws in your jurisdiction",
+        "url": "varies by state",
+        "deadline": "typically within 1 year of discriminatory act",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "60-180 days",
+        "prerequisites": "Documentation of housing discrimination",
+        "notes": "Some states have stronger protections than federal law"
+      },
+      {
+        "form_name": "Legal Aid Application",
+        "agency": "Local Legal Aid Society",
+        "description": "Apply for free legal representation if you qualify based on income",
+        "url": "https://www.lsc.gov/find-legal-aid",
+        "deadline": "as soon as possible",
+        "online_only": false,
+        "fees": "Free",
+        "processing_time": "2-6 weeks",
+        "prerequisites": "Income documentation and case details",
+        "notes": "ADA housing cases may qualify for priority handling"
+      }
+    ]
   }
 ]

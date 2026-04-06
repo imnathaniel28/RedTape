@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { queryOne, execute } from "@/lib/db";
 import { cachePdfBytes } from "@/lib/pdf/downloader";
 import { extractFormFields, isXfaForm } from "@/lib/pdf/field-extractor";
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const formData = await req.formData();
     const formId = formData.get("form_id");
     const file = formData.get("file");
@@ -16,14 +25,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const db = getDb();
-    const form = db
-      .prepare("SELECT * FROM case_forms WHERE id = ?")
-      .get(Number(formId)) as {
+    const form = await queryOne<{
       id: number;
       form_name: string;
       pdf_url: string | null;
-    } | undefined;
+    }>("SELECT * FROM case_forms WHERE id = ?", [Number(formId)]);
 
     if (!form) {
       return NextResponse.json(
@@ -56,16 +62,17 @@ export async function POST(req: NextRequest) {
     cachePdfBytes(syntheticUrl, bytes);
 
     // Update the form record with the synthetic pdf_url
-    db.prepare("UPDATE case_forms SET pdf_url = ? WHERE id = ?").run(
-      syntheticUrl,
-      form.id
+    await execute(
+      "UPDATE case_forms SET pdf_url = ? WHERE id = ?",
+      [syntheticUrl, form.id]
     );
 
     // Extract and cache fields
     const fields = await extractFormFields(bytes);
-    db.prepare(
-      "INSERT OR REPLACE INTO pdf_field_cache (form_name, pdf_url, fields_json) VALUES (?, ?, ?)"
-    ).run(form.form_name, syntheticUrl, JSON.stringify(fields));
+    await execute(
+      "INSERT OR REPLACE INTO pdf_field_cache (form_name, pdf_url, fields_json) VALUES (?, ?, ?)",
+      [form.form_name, syntheticUrl, JSON.stringify(fields)]
+    );
 
     return NextResponse.json({
       success: true,

@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import { generatePrefillData } from "@/lib/prefiller";
-import { getDb } from "@/lib/db";
+import { queryOne, execute } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const { form_id } = await req.json();
     if (!form_id) {
       return NextResponse.json(
@@ -12,10 +21,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const db = getDb();
-    const form = db
-      .prepare("SELECT * FROM case_forms WHERE id = ?")
-      .get(form_id) as { id: number; form_name: string; case_id: number } | undefined;
+    const form = await queryOne<{
+      id: number;
+      form_name: string;
+      case_id: number;
+    }>("SELECT * FROM case_forms WHERE id = ?", [form_id]);
 
     if (!form) {
       return NextResponse.json(
@@ -24,12 +34,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const prefillData = generatePrefillData(form.form_name);
+    const prefillData = await generatePrefillData(form.form_name, userId);
 
     // Store prefill data on the form record
-    db.prepare("UPDATE case_forms SET prefill_data = ? WHERE id = ?").run(
-      JSON.stringify(prefillData),
-      form_id
+    await execute(
+      "UPDATE case_forms SET prefill_data = ? WHERE id = ?",
+      [JSON.stringify(prefillData), form_id]
     );
 
     return NextResponse.json({

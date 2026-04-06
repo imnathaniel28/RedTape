@@ -1,4 +1,4 @@
-# Bureaucracy Buster
+# RedTape
 
 An AI agent that navigates government paperwork on behalf of everyday people. Tell it a life event — "I'm moving to Texas," "my mother passed away," "I'm starting an LLC" — and it identifies every form you need across every agency, pre-fills them, tracks deadlines, and handles follow-ups.
 
@@ -99,7 +99,7 @@ Deadline:    { id, form_task_id, due_date, reminder_sent, description }
 4. Add form dependency detection ("you need Form A approved before filing Form B")
 
 ### Phase 5 — Polish + Viral Features
-1. Side-by-side comparison: "time without Bureaucracy Buster vs. with"
+1. Side-by-side comparison: "time without RedTape vs. with"
 2. Shareable completion certificates ("I conquered the DMV in 11 minutes")
 3. Life event templates with community contributions
 4. Export full audit trail as PDF

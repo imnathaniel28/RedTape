@@ -1,60 +1,96 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import { analyzeLifeEvent } from "@/lib/analyzer";
-import { getDb } from "@/lib/db";
+import { queryOne, execute } from "@/lib/db";
 import { generateDeadlinesForCase } from "@/lib/deadlines";
 import { addLifeEvent, type LifeEvent } from "@/lib/form-registry";
 import { researchLifeEvent } from "@/lib/ai/research";
+import { checkAndIncrementSearch } from "@/lib/billing";
 import pdfSources from "@/data/pdf-sources.json";
+
+async function logSearch(
+  userId: string,
+  queryText: string,
+  matchedEvent: string | null,
+  aiGenerated: boolean,
+  success: boolean
+) {
+  try {
+    await execute(
+      "INSERT INTO search_logs (user_id, query_text, matched_event, ai_generated, success) VALUES (?, ?, ?, ?, ?)",
+      [userId, queryText, matchedEvent, aiGenerated ? 1 : 0, success ? 1 : 0]
+    );
+  } catch {
+    // Non-fatal — never block the main flow
+  }
+}
 
 const pdfSourceMap = pdfSources as Record<
   string,
   { pdf_url: string; fillable: boolean }
 >;
 
-function createCaseFromEvent(event: LifeEvent, description: string) {
-  const db = getDb();
-
-  const caseResult = db
-    .prepare("INSERT INTO cases (life_event, description) VALUES (?, ?)")
-    .run(event.event, description);
+async function createCaseFromEvent(event: LifeEvent, description: string, userId: string) {
+  const caseResult = await execute(
+    "INSERT INTO cases (life_event, description, user_id) VALUES (?, ?, ?)",
+    [event.event, description, userId]
+  );
 
   const caseId = Number(caseResult.lastInsertRowid);
 
-  const insertForm = db.prepare(`
-    INSERT INTO case_forms (case_id, form_name, agency, description, url, deadline, notes, fees, processing_time, prerequisites, online_only, pdf_url)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `);
-
   for (const form of event.forms) {
     const pdfSource = pdfSourceMap[form.form_name];
-    insertForm.run(
-      caseId,
-      form.form_name,
-      form.agency,
-      form.description,
-      form.url,
-      form.deadline ?? null,
-      form.notes,
-      form.fees ?? null,
-      form.processing_time ?? null,
-      form.prerequisites ?? null,
-      form.online_only ? 1 : 0,
-      pdfSource?.pdf_url ?? null
+    await execute(
+      `INSERT INTO case_forms (case_id, form_name, agency, description, url, deadline, notes, fees, processing_time, prerequisites, online_only, pdf_url)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        caseId,
+        form.form_name,
+        form.agency,
+        form.description,
+        form.url,
+        form.deadline ?? null,
+        form.notes,
+        form.fees ?? null,
+        form.processing_time ?? null,
+        form.prerequisites ?? null,
+        form.online_only ? 1 : 0,
+        pdfSource?.pdf_url ?? null,
+      ]
     );
   }
 
-  generateDeadlinesForCase(caseId);
+  await generateDeadlinesForCase(caseId);
   return caseId;
 }
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const { text } = await req.json();
     if (!text || typeof text !== "string") {
       return NextResponse.json(
         { success: false, error: "Missing 'text' field" },
         { status: 400 }
       );
+    }
+
+    const searchCheck = await checkAndIncrementSearch(userId);
+    if (!searchCheck.allowed) {
+      return NextResponse.json({
+        success: false,
+        error: searchCheck.reason,
+        upgrade_required: true,
+        searches_used: searchCheck.searches_used,
+        searches_limit: searchCheck.searches_limit,
+      }, { status: 403 });
     }
 
     const analysis = analyzeLifeEvent(text);
@@ -70,8 +106,10 @@ export async function POST(req: NextRequest) {
         aiGenerated = true;
 
         // Save as a new template so it's available for future use
-        addLifeEvent(topEvent);
+        await addLifeEvent(topEvent);
       } catch (aiError) {
+        void aiError;
+        await logSearch(userId, text, null, true, false);
         return NextResponse.json({
           success: false,
           error:
@@ -80,7 +118,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const caseId = createCaseFromEvent(topEvent, text);
+    const caseId = await createCaseFromEvent(topEvent, text, userId);
+    await logSearch(userId, text, topEvent.event, aiGenerated, true);
 
     return NextResponse.json({
       success: true,

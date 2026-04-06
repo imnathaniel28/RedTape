@@ -1,0 +1,7 @@
+URL:
+libsql://redtape-imnathaniel28.aws-us-west-2.turso.io
+
+TOKEN:
+eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzQ5MTQyNzIsImlkIjoiMDE5ZDQxMjEtZDkwMS03YTRiLWE0MmMtZjRiNDRlZGQ5MDdjIiwicmlkIjoiYzYwMWIwYTgtNjQ3NS00OTRmLTlkYTAtMTE1ZDUyNjlmZGFlIn0.I6EK8oujxxcHIE8qERIKXkfvCWn4CmvfV83w_8i0cCoxRUaXTNseAUd_UBY_93PUfLGe8lWW2Dzqr5uIkOcLBw
+
+

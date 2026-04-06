@@ -40,7 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# bureaucracy buster
+# redtape
 /data/bureaucracy.db
 /data/pdf-cache/
 /generated/
+
+.vercel

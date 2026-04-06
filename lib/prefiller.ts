@@ -1,7 +1,8 @@
-import { getDb } from "./db";
+import { queryOne, execute } from "./db";
 
 export interface UserProfile {
-  id: number;
+  id?: number;
+  user_id?: string;
   full_name: string | null;
   date_of_birth: string | null;
   ssn_last4: string | null;
@@ -14,28 +15,50 @@ export interface UserProfile {
   drivers_license: string | null;
 }
 
-export function getUserProfile(): UserProfile {
-  const db = getDb();
-  return db.prepare("SELECT * FROM user_profile WHERE id = 1").get() as UserProfile;
+export async function getUserProfile(userId: string): Promise<UserProfile | undefined> {
+  return queryOne<UserProfile>(
+    "SELECT * FROM user_profile WHERE user_id = ?",
+    [userId]
+  );
 }
 
-export function updateUserProfile(data: Partial<Omit<UserProfile, "id">>): UserProfile {
-  const db = getDb();
-  const fields = Object.keys(data).filter((k) => k !== "id");
-  if (fields.length === 0) return getUserProfile();
+export async function updateUserProfile(
+  userId: string,
+  data: Partial<Omit<UserProfile, "id" | "user_id">>
+): Promise<UserProfile | undefined> {
+  const fields = Object.keys(data).filter((k) => k !== "id" && k !== "user_id");
+  if (fields.length === 0) return getUserProfile(userId);
 
-  const sets = fields.map((f) => `${f} = @${f}`).join(", ");
-  db.prepare(`UPDATE user_profile SET ${sets} WHERE id = 1`).run(data);
-  return getUserProfile();
+  // Try to update existing row first
+  const sets = fields.map((f) => `${f} = ?`).join(", ");
+  const values = fields.map((f) => (data as Record<string, unknown>)[f]);
+  const result = await execute(
+    `UPDATE user_profile SET ${sets} WHERE user_id = ?`,
+    [...values, userId]
+  );
+
+  if (result.rowsAffected === 0) {
+    // No row exists yet — insert a new one
+    const cols = ["user_id", ...fields].join(", ");
+    const placeholders = ["?", ...fields.map(() => "?")].join(", ");
+    await execute(
+      `INSERT INTO user_profile (${cols}) VALUES (${placeholders})`,
+      [userId, ...values]
+    );
+  }
+
+  return getUserProfile(userId);
 }
 
 export interface PrefillData {
   [fieldName: string]: string;
 }
 
-export function generatePrefillData(formName: string): PrefillData {
-  const profile = getUserProfile();
+export async function generatePrefillData(formName: string, userId: string): Promise<PrefillData> {
+  const profile = await getUserProfile(userId);
   const data: PrefillData = {};
+
+  if (!profile) return data;
 
   // Common field mappings
   if (profile.full_name) {
@@ -67,5 +90,6 @@ export function generatePrefillData(formName: string): PrefillData {
   if (profile.email) data["Email"] = profile.email;
   if (profile.drivers_license) data["Driver's License"] = profile.drivers_license;
 
+  void formName;
   return data;
 }

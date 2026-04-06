@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import { getUserProfile, updateUserProfile } from "@/lib/prefiller";
 
 export async function GET() {
   try {
-    const profile = getUserProfile();
-    return NextResponse.json({ success: true, data: profile });
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const profile = await getUserProfile(userId);
+    return NextResponse.json({ success: true, data: profile ?? null });
   } catch (error) {
     return NextResponse.json(
       { success: false, error: String(error) },
@@ -15,8 +24,16 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
-    const updated = updateUserProfile(body);
+    const updated = await updateUserProfile(userId, body);
     return NextResponse.json({ success: true, data: updated });
   } catch (error) {
     return NextResponse.json(

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,6 +33,7 @@ const EMPTY_PROFILE: ProfileData = {
 };
 
 export function ProfileForm() {
+  const router = useRouter();
   const [profile, setProfile] = useState<ProfileData>(EMPTY_PROFILE);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -67,7 +69,10 @@ export function ProfileForm() {
         body: JSON.stringify(profile),
       });
       const json = await res.json();
-      if (json.success) setSaved(true);
+      if (json.success) {
+        setSaved(true);
+        router.push("/dashboard");
+      }
     } finally {
       setSaving(false);
     }

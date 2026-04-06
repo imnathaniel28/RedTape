@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { queryOne, queryAll, execute } from "@/lib/db";
 import { analyzeDependencies, sortByDependencyOrder } from "@/lib/dependencies";
 import { getTimeEstimate } from "@/lib/time-estimates";
 
@@ -8,14 +9,23 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
-    const db = getDb();
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
-    const caseData = db.prepare("SELECT * FROM cases WHERE id = ?").get(id) as {
+    const { id } = await params;
+
+    const caseData = await queryOne<{
       id: number;
       life_event: string;
+      user_id: string | null;
       [key: string]: unknown;
-    } | undefined;
+    }>("SELECT * FROM cases WHERE id = ?", [id]);
+
     if (!caseData) {
       return NextResponse.json(
         { success: false, error: "Case not found" },
@@ -23,9 +33,19 @@ export async function GET(
       );
     }
 
-    const rawForms = db
-      .prepare("SELECT * FROM case_forms WHERE case_id = ? ORDER BY id")
-      .all(id) as Array<{ id: number; form_name: string; status: string; [key: string]: unknown }>;
+    if (caseData.user_id !== userId) {
+      return NextResponse.json(
+        { success: false, error: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
+    const rawForms = await queryAll<{
+      id: number;
+      form_name: string;
+      status: string;
+      [key: string]: unknown;
+    }>("SELECT * FROM case_forms WHERE case_id = ? ORDER BY id", [id]);
 
     // Sort by dependency order and annotate with dependency info
     const sorted = sortByDependencyOrder(caseData.life_event, rawForms);
@@ -45,11 +65,10 @@ export async function GET(
       };
     });
 
-    const deadlines = db
-      .prepare(
-        "SELECT * FROM deadlines WHERE case_id = ? ORDER BY due_date ASC"
-      )
-      .all(id);
+    const deadlines = await queryAll(
+      "SELECT * FROM deadlines WHERE case_id = ? ORDER BY due_date ASC",
+      [id]
+    );
 
     const timeEstimate = getTimeEstimate(caseData.life_event);
 
@@ -70,17 +89,45 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
-    const body = await req.json();
-    const db = getDb();
-
-    if (body.state) {
-      db.prepare(
-        "UPDATE cases SET state = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?"
-      ).run(body.state, id);
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
-    const updated = db.prepare("SELECT * FROM cases WHERE id = ?").get(id);
+    const { id } = await params;
+
+    const caseData = await queryOne<{ user_id: string | null }>(
+      "SELECT user_id FROM cases WHERE id = ?",
+      [id]
+    );
+
+    if (!caseData) {
+      return NextResponse.json(
+        { success: false, error: "Case not found" },
+        { status: 404 }
+      );
+    }
+
+    if (caseData.user_id !== userId) {
+      return NextResponse.json(
+        { success: false, error: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
+    const body = await req.json();
+
+    if (body.state) {
+      await execute(
+        "UPDATE cases SET state = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        [body.state, id]
+      );
+    }
+
+    const updated = await queryOne("SELECT * FROM cases WHERE id = ?", [id]);
     return NextResponse.json({ success: true, data: updated });
   } catch (error) {
     return NextResponse.json(

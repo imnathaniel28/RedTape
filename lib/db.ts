@@ -1,23 +1,24 @@
-import Database from "better-sqlite3";
-import path from "path";
+import { createClient, type Client } from "@libsql/client";
 
-const DB_PATH = path.join(process.cwd(), "data", "bureaucracy.db");
+let client: Client | null = null;
+let schemaReady = false;
+let schemaPromise: Promise<void> | null = null;
 
-let db: Database.Database | null = null;
-
-export function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma("journal_mode = WAL");
-    db.pragma("foreign_keys = ON");
-    initSchema(db);
+function getClient(): Client {
+  if (!client) {
+    client = createClient({
+      url: process.env.TURSO_DATABASE_URL || "file:data/bureaucracy.db",
+      authToken: process.env.TURSO_AUTH_TOKEN,
+    });
   }
-  return db;
+  return client;
 }
 
-function initSchema(db: Database.Database) {
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS user_profile (
+async function initSchema(): Promise<void> {
+  const c = getClient();
+
+  await c.batch([
+    `CREATE TABLE IF NOT EXISTS user_profile (
       id INTEGER PRIMARY KEY DEFAULT 1,
       full_name TEXT,
       date_of_birth TEXT,
@@ -30,18 +31,16 @@ function initSchema(db: Database.Database) {
       email TEXT,
       drivers_license TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS cases (
+    )`,
+    `CREATE TABLE IF NOT EXISTS cases (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       life_event TEXT NOT NULL,
       description TEXT,
       state TEXT DEFAULT 'active',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS case_forms (
+    )`,
+    `CREATE TABLE IF NOT EXISTS case_forms (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       case_id INTEGER REFERENCES cases(id),
       form_name TEXT NOT NULL,
@@ -52,10 +51,16 @@ function initSchema(db: Database.Database) {
       deadline TEXT,
       notes TEXT,
       prefill_data TEXT,
+      fees TEXT,
+      processing_time TEXT,
+      prerequisites TEXT,
+      pdf_url TEXT,
+      field_mapping TEXT,
+      pdf_filled INTEGER DEFAULT 0,
+      online_only INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS deadlines (
+    )`,
+    `CREATE TABLE IF NOT EXISTS deadlines (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       case_id INTEGER REFERENCES cases(id),
       case_form_id INTEGER REFERENCES case_forms(id),
@@ -63,62 +68,110 @@ function initSchema(db: Database.Database) {
       due_date TEXT NOT NULL,
       reminder_sent INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-  `);
-
-  // Add enriched columns if they don't exist (migration)
-  const columns = db
-    .prepare("PRAGMA table_info(case_forms)")
-    .all() as { name: string }[];
-  const colNames = columns.map((c) => c.name);
-  if (!colNames.includes("fees")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN fees TEXT");
-  }
-  if (!colNames.includes("processing_time")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN processing_time TEXT");
-  }
-  if (!colNames.includes("prerequisites")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN prerequisites TEXT");
-  }
-  if (!colNames.includes("pdf_url")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN pdf_url TEXT");
-  }
-  if (!colNames.includes("field_mapping")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN field_mapping TEXT");
-  }
-  if (!colNames.includes("pdf_filled")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN pdf_filled INTEGER DEFAULT 0");
-  }
-  if (!colNames.includes("online_only")) {
-    db.exec("ALTER TABLE case_forms ADD COLUMN online_only INTEGER DEFAULT 0");
-  }
-
-  // PDF field cache table
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS pdf_field_cache (
+    )`,
+    `CREATE TABLE IF NOT EXISTS pdf_field_cache (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       form_name TEXT NOT NULL UNIQUE,
       pdf_url TEXT,
       fields_json TEXT NOT NULL,
       extracted_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-  `);
+    )`,
+    `CREATE TABLE IF NOT EXISTS life_event_templates (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      event_key TEXT NOT NULL UNIQUE,
+      event_data TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`,
+    `CREATE TABLE IF NOT EXISTS search_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT,
+      query_text TEXT NOT NULL,
+      matched_event TEXT,
+      ai_generated INTEGER DEFAULT 0,
+      success INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`,
+    `CREATE TABLE IF NOT EXISTS user_subscriptions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL UNIQUE,
+      plan TEXT DEFAULT 'free',
+      stripe_customer_id TEXT,
+      stripe_subscription_id TEXT,
+      searches_used INTEGER DEFAULT 0,
+      autofill_credits INTEGER DEFAULT 0,
+      period_start TEXT,
+      period_end TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`,
+  ]);
 
-  // Ensure a default profile row exists
-  const profile = db.prepare("SELECT id FROM user_profile WHERE id = 1").get();
-  if (!profile) {
-    db.prepare("INSERT INTO user_profile (id) VALUES (1)").run();
+  // Migrations: add user_id columns to existing tables (safe to run repeatedly)
+  try {
+    await c.execute({ sql: "ALTER TABLE user_profile ADD COLUMN user_id TEXT", args: [] });
+  } catch {
+    // Column already exists — ignore
   }
+  try {
+    await c.execute({ sql: "ALTER TABLE cases ADD COLUMN user_id TEXT", args: [] });
+  } catch {
+    // Column already exists — ignore
+  }
+
+  schemaReady = true;
 }
 
-export function resetDb() {
-  const database = getDb();
-  database.exec(`
-    DROP TABLE IF EXISTS pdf_field_cache;
-    DROP TABLE IF EXISTS deadlines;
-    DROP TABLE IF EXISTS case_forms;
-    DROP TABLE IF EXISTS cases;
-    DROP TABLE IF EXISTS user_profile;
-  `);
-  initSchema(database);
+export async function ensureSchema(): Promise<void> {
+  if (schemaReady) return;
+  if (!schemaPromise) {
+    schemaPromise = initSchema();
+  }
+  return schemaPromise;
+}
+
+export async function queryAll<T = Record<string, unknown>>(
+  sql: string,
+  args: unknown[] = []
+): Promise<T[]> {
+  await ensureSchema();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await getClient().execute({ sql, args: args as any });
+  return result.rows as unknown as T[];
+}
+
+export async function queryOne<T = Record<string, unknown>>(
+  sql: string,
+  args: unknown[] = []
+): Promise<T | undefined> {
+  await ensureSchema();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await getClient().execute({ sql, args: args as any });
+  return result.rows[0] as unknown as T | undefined;
+}
+
+export async function execute(
+  sql: string,
+  args: unknown[] = []
+): Promise<{ lastInsertRowid: number; rowsAffected: number }> {
+  await ensureSchema();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await getClient().execute({ sql, args: args as any });
+  return {
+    lastInsertRowid: Number(result.lastInsertRowid ?? 0),
+    rowsAffected: result.rowsAffected,
+  };
+}
+
+export async function resetDb(): Promise<void> {
+  schemaReady = false;
+  schemaPromise = null;
+  const c = getClient();
+  await c.batch([
+    "DROP TABLE IF EXISTS pdf_field_cache",
+    "DROP TABLE IF EXISTS deadlines",
+    "DROP TABLE IF EXISTS case_forms",
+    "DROP TABLE IF EXISTS cases",
+    "DROP TABLE IF EXISTS user_profile",
+  ]);
+  await initSchema();
 }

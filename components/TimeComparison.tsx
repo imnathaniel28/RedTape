@@ -32,7 +32,7 @@ export function TimeComparison({
       <div className="space-y-3">
         <div>
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-muted-foreground">Without Bureaucracy Buster</span>
+            <span className="text-muted-foreground">Without RedTape</span>
             <span className="font-medium text-red-600">{formatTime(withoutMinutes)}</span>
           </div>
           <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
@@ -45,7 +45,7 @@ export function TimeComparison({
 
         <div>
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-muted-foreground">With Bureaucracy Buster</span>
+            <span className="text-muted-foreground">With RedTape</span>
             <span className="font-medium text-green-600">{formatTime(withMinutes)}</span>
           </div>
           <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">

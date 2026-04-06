@@ -3,7 +3,7 @@
  * Includes: researching requirements, finding forms, traveling to offices,
  * waiting in lines, filling out forms, making phone calls, follow-ups.
  *
- * WITH Bureaucracy Buster: forms are identified instantly, pre-filled,
+ * WITH RedTape: forms are identified instantly, pre-filled,
  * dependencies are tracked, deadlines are auto-calculated.
  */
 

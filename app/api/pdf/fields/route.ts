@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { queryOne, execute } from "@/lib/db";
 import { downloadPdf } from "@/lib/pdf/downloader";
 import { extractFormFields, isXfaForm } from "@/lib/pdf/field-extractor";
 import { mapFieldsWithClaude } from "@/lib/ai/field-mapper";
@@ -9,6 +10,14 @@ import { pdfFieldsRequestSchema } from "@/lib/validations/api-schemas";
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     const parsed = pdfFieldsRequestSchema.safeParse(body);
     if (!parsed.success) {
@@ -19,18 +28,15 @@ export async function POST(req: NextRequest) {
     }
 
     const { form_id } = parsed.data;
-    const db = getDb();
 
-    const form = db
-      .prepare("SELECT * FROM case_forms WHERE id = ?")
-      .get(form_id) as {
+    const form = await queryOne<{
       id: number;
       form_name: string;
       pdf_url: string | null;
       url: string;
       online_only: number;
       field_mapping: string | null;
-    } | undefined;
+    }>("SELECT * FROM case_forms WHERE id = ?", [form_id]);
 
     if (!form) {
       return NextResponse.json(
@@ -55,9 +61,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Check cache first
-    const cached = db
-      .prepare("SELECT fields_json FROM pdf_field_cache WHERE form_name = ?")
-      .get(form.form_name) as { fields_json: string } | undefined;
+    const cached = await queryOne<{ fields_json: string }>(
+      "SELECT fields_json FROM pdf_field_cache WHERE form_name = ?",
+      [form.form_name]
+    );
 
     let fields;
     if (cached) {
@@ -75,26 +82,27 @@ export async function POST(req: NextRequest) {
       fields = await extractFormFields(pdfBytes);
 
       // Cache the extracted fields
-      db.prepare(
-        "INSERT OR REPLACE INTO pdf_field_cache (form_name, pdf_url, fields_json) VALUES (?, ?, ?)"
-      ).run(form.form_name, pdfUrl, JSON.stringify(fields));
+      await execute(
+        "INSERT OR REPLACE INTO pdf_field_cache (form_name, pdf_url, fields_json) VALUES (?, ?, ?)",
+        [form.form_name, pdfUrl, JSON.stringify(fields)]
+      );
     }
 
     // Get suggested mapping from Claude
-    const profile = getUserProfile();
-    const profileValidation = validateProfileForFill(profile as unknown as Record<string, unknown>);
+    const profile = await getUserProfile(userId);
+    const profileValidation = validateProfileForFill((profile ?? {}) as unknown as Record<string, unknown>);
 
     let suggestedMapping: Record<string, string> = {};
     if (fields.length > 0) {
       // Use existing mapping if available, otherwise call Claude
       if (form.field_mapping) {
         suggestedMapping = JSON.parse(form.field_mapping);
-      } else {
+      } else if (profile) {
         suggestedMapping = await mapFieldsWithClaude(form.form_name, fields, profile);
         // Save the mapping for reuse
-        db.prepare("UPDATE case_forms SET field_mapping = ? WHERE id = ?").run(
-          JSON.stringify(suggestedMapping),
-          form_id
+        await execute(
+          "UPDATE case_forms SET field_mapping = ? WHERE id = ?",
+          [JSON.stringify(suggestedMapping), form_id]
         );
       }
     }

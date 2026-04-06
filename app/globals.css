@@ -47,7 +47,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Bureaucracy Buster custom colors */
+  /* RedTape custom colors */
   --color-navy: #1a365d;
   --color-navy-light: #2a4a7f;
   --color-navy-dark: #0f2440;
@@ -97,7 +97,8 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: transparent;
   }
   html {
     @apply font-sans;
@@ -122,4 +123,53 @@
 @keyframes pulse-red {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+}
+
+/* Animated aurora background */
+@keyframes blob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -60px) scale(1.12); }
+  66%       { transform: translate(-25px, 30px) scale(0.92); }
+}
+@keyframes blob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, 40px) scale(0.94); }
+  66%       { transform: translate(30px, -40px) scale(1.08); }
+}
+@keyframes blob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, 50px) scale(1.06); }
+  66%       { transform: translate(-40px, -25px) scale(0.96); }
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.aurora-blob-1 {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -100px;
+  background: radial-gradient(circle, #2a4a7f 0%, #1a365d 60%, transparent 100%);
+  animation: blob1 18s ease-in-out infinite;
+}
+.aurora-blob-2 {
+  width: 500px;
+  height: 500px;
+  top: 30%;
+  right: -120px;
+  background: radial-gradient(circle, #4a90d9 0%, #2a6cb5 60%, transparent 100%);
+  animation: blob2 22s ease-in-out infinite;
+}
+.aurora-blob-3 {
+  width: 450px;
+  height: 450px;
+  bottom: -100px;
+  left: 35%;
+  background: radial-gradient(circle, #1a365d 0%, #0f2440 60%, transparent 100%);
+  animation: blob3 26s ease-in-out infinite;
 }

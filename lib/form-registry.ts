@@ -1,6 +1,5 @@
-import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
 import lifeEvents from "@/data/life-events.json";
+import { queryAll, execute } from "@/lib/db";
 
 export interface FormInfo {
   form_name: string;
@@ -22,7 +21,7 @@ export interface LifeEvent {
   forms: FormInfo[];
 }
 
-// In-memory copy that can be extended at runtime
+// In-memory copy seeded from JSON, extended at runtime by DB-persisted templates
 const runtimeEvents: LifeEvent[] = [...(lifeEvents as LifeEvent[])];
 
 export function getAllLifeEvents(): LifeEvent[] {
@@ -31,30 +30,49 @@ export function getAllLifeEvents(): LifeEvent[] {
 
 /**
  * Add a new life event template to the registry.
- * Persists to the JSON file and updates the in-memory list.
+ * Persists to Turso so it survives serverless cold starts.
  */
-export function addLifeEvent(event: LifeEvent): void {
-  // Skip if an event with this key already exists
+export async function addLifeEvent(event: LifeEvent): Promise<void> {
   if (runtimeEvents.some((e) => e.event === event.event)) return;
-
   runtimeEvents.push(event);
 
-  // Persist to disk so it survives restarts
   try {
-    const filePath = join(process.cwd(), "data", "life-events.json");
-    writeFileSync(filePath, JSON.stringify(runtimeEvents, null, 2), "utf-8");
+    await execute(
+      "INSERT OR IGNORE INTO life_event_templates (event_key, event_data) VALUES (?, ?)",
+      [event.event, JSON.stringify(event)]
+    );
   } catch {
-    // Non-fatal — the event is still in memory for this session
+    // Non-fatal — event is still in memory for this session
+  }
+}
+
+/**
+ * Load any AI-researched templates saved in the DB into the in-memory registry.
+ * Call this at the start of routes that list or search templates.
+ */
+export async function hydrateFromDb(): Promise<void> {
+  try {
+    const rows = await queryAll<{ event_key: string; event_data: string }>(
+      "SELECT event_key, event_data FROM life_event_templates"
+    );
+    for (const row of rows) {
+      const event = JSON.parse(row.event_data) as LifeEvent;
+      if (!runtimeEvents.some((e) => e.event === event.event)) {
+        runtimeEvents.push(event);
+      }
+    }
+  } catch {
+    // Non-fatal
   }
 }
 
 export function getLifeEvent(eventKey: string): LifeEvent | undefined {
-  return (lifeEvents as LifeEvent[]).find((e) => e.event === eventKey);
+  return runtimeEvents.find((e) => e.event === eventKey);
 }
 
 export function searchLifeEvents(query: string): LifeEvent[] {
   const lower = query.toLowerCase();
-  return (lifeEvents as LifeEvent[]).filter(
+  return runtimeEvents.filter(
     (e) =>
       e.label.toLowerCase().includes(lower) ||
       e.description.toLowerCase().includes(lower) ||

@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import { getAllLifeEvents } from "@/lib/form-registry";
+import { getAllLifeEvents, hydrateFromDb } from "@/lib/form-registry";
 import { getAllTimeEstimates } from "@/lib/time-estimates";
 
 export async function GET() {
   try {
+    await hydrateFromDb();
     const events = getAllLifeEvents();
     const timeEstimates = getAllTimeEstimates();
 
